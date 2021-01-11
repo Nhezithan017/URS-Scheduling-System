@@ -1,0 +1,7 @@
+.input-ucfirst{
+    text-transform: capitalize;
+}
+.input-upper{
+    text-transform: uppercase;
+}
+.hr { color: rgb(255, 245, 245); border-style: inset; border-width: thin; margin: 0.5em auto; }
