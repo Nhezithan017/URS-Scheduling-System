@@ -32,7 +32,7 @@
 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
   <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">Custom Utilities:</h6>
-    <a class="collapse-item" href="">Users</a>
+    <a class="collapse-item" href="{{ route('users.index') }}">Users</a>
    
   </div>  
 </div>
@@ -42,12 +42,12 @@
 <li class="nav-item">
 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#toolsUtilities" aria-expanded="true" aria-controls="collapseUtilities">
 <i class="fas fa-fw fa-wrench"></i>
-  <span>Tools</span>
+  <span>Course Department</span>
 </a>
 <div id="toolsUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
   <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">Custom Utilities:</h6>
-    <a class="collapse-item" href="">Audit Trail</a> 
+    <a class="collapse-item" href="">Courses</a> 
   </div>  
 </div>
 </li>

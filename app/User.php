@@ -19,6 +19,11 @@ class User extends Authenticatable
         
     ];
 
+    public function course()
+    {
+        return $this->hasOne('App\Course');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
