@@ -16,10 +16,10 @@ class CreateTeachersTable extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->longText('address');
-            $table->integer('phone');
-            $table->string('designation');
-            $table->string('course_id');
+            $table->string('degree');
+            $table->string('educ_status');
+            $table->string('position_title');
+            $table->string('nature_of_appoint');
             $table->timestamps();
             $table->softDeletes();
         });

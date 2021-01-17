@@ -3,7 +3,7 @@
 @section('main-content')
 <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-fw fa-user"></i>Create Users</h6>
+                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-fw fa-user"></i> {{ $modify == 1 ? 'Update' : 'Create' }} User</h6>
             </div>
             <div class="card-body">
             <div class="d-flex justify-content-between">
@@ -12,14 +12,14 @@
               <div class="table-responsive">
               <div class="container">
                 @include('layouts.errors')
-                <form method="POST" action="{{ route ('user.insert') }}">
+                <form action="{{ $modify == 1 ? route('user.update', [ 'user_id' => $user_id ]) : route('user.create') }}" method="post">
                     @csrf
                 
               <div class="row">
                     <div class="col">
                         <div class="form-group">
                         <label for="" class="form-label">Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="{{ __('Name') }}" value="{{ old('name') }}"  autofocus>
+                            <input type="text" class="form-control" name="name" placeholder="{{ __('Name') }}" value="{{ $user->name ?? old('username') }}"  autofocus>
                         </div>
             
                     </div>
@@ -29,28 +29,18 @@
                     <div class="col">
                         <div class="form-group">
                         <label for="" class="form-label">Username</label>
-                            <input type="text" class="form-control" name="username" placeholder="{{ __('Username') }}" value="{{ old('username') }}"  autofocus>
+                            <input type="text" class="form-control" name="username" placeholder="{{ __('Username') }}" value="{{ $user->username ?? old('username') }}"  autofocus>
                         </div>
             
-                    </div>
+                    </div>  
               </div> 
 
 
                     <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                <label for="" class="form-label">Email</label>
-                                    <input type="text" class="form-control" name="email" placeholder="{{ __('Email') }}" value="{{ old('email') }}"  autofocus>
-                                </div>
-                    
-                            </div>
-                    </div> 
-
-                    <div class="row">
-                            <div class="col">
-                                <div class="form-group">
                                 <label for="" class="form-label">Password</label>
-                                    <input type="text" class="form-control" name="password" placeholder="{{ __('Password') }}" value="{{ old('password') }}"  autofocus>
+                                    <input type="password" class="form-control" name="password" placeholder="{{ __('Password') }}" value="{{ old('password') }}"  autofocus>
                                 </div>
                     
                             </div>

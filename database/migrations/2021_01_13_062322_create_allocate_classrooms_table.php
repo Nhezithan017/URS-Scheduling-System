@@ -13,14 +13,23 @@ class CreateAllocateClassroomsTable extends Migration
      */
     public function up()
     {
+            
+        
+
         Schema::create('allocate_classrooms', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('course_id');
-            $table->integer('subject_id');
-            $table->string('Room_No');
+            $table->increments('id');
+            $table->string('room_no');
+            $table->string('teacher');
             $table->json('days');
-            $table->timeTz('start_time');
-            $table->timeTz('end_time');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->integer('subject_id')->unsigned();
+            $table->foreign('subject_id')->references('id')->on('subjects')
+            ->onDelete('cascade');
+            $table->integer('section_id')->unsigned();
+            $table->foreign('section_id')->references('id')->on('sections')
+            ->onDelete('cascade');
+            $table->boolean('status')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +42,7 @@ class CreateAllocateClassroomsTable extends Migration
      */
     public function down()
     {
+        
         Schema::dropIfExists('allocate_classrooms');
     }
 }

@@ -8,13 +8,13 @@
 
 <!-- Barangay Profile -->
 <li class="nav-item">
-@can('lists-barangay-profile')
-<a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#barangayProfile" aria-expanded="true" aria-controls="collapseUtilities">
+
+<a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#departmentProfile" aria-expanded="true" aria-controls="collapseUtilities">
 <i class="fas fa-fw fa-users"></i>
-  <span>Barangay Profile</span>
+  <span>Department Profile</span>
 </a>
-@endcan
-<div id="barangayProfile" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+
+<div id="departmentProfile" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
   <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">Custom Utilities:</h6>
     <a class="collapse-item" href="">Settings</a>
@@ -40,18 +40,31 @@
 
 <!-- Tools  -->
 <li class="nav-item">
-<a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#toolsUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-<i class="fas fa-fw fa-wrench"></i>
+<a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#course" aria-expanded="true" aria-controls="collapseUtilities">
+<i class="fas fa-building"></i> 
   <span>Course Department</span>
 </a>
-<div id="toolsUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+<div id="course" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
   <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">Custom Utilities:</h6>
-    <a class="collapse-item" href="">Courses</a> 
+    <a class="collapse-item" href="{{ route('courses.index') }}">Courses</a> 
   </div>  
 </div>
 </li>
 
+<!-- Tools  -->
+<li class="nav-item">
+<a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#subject" aria-expanded="true" aria-controls="collapseUtilities">
+<i class="fas fa-book-reader"></i>
+  <span>Subjects</span>
+</a>
+<div id="subject" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+  <div class="bg-white py-2 collapse-inner rounded">
+    <h6 class="collapse-header">Custom Utilities:</h6>
+    <a class="collapse-item" href="">Subject</a> 
+  </div>  
+</div>
+</li>
 
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">

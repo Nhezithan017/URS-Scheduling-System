@@ -2,13 +2,35 @@
 
 @section('main-content')
 @include('layouts.success')
+
 <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-fw fa-user"></i> Users</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Show</h6>
+            </div>
+            <div class="card-body">
+            <div class="container">
+  <div class="row gy-5">
+    <div class="col-4">
+      <div class="p-3 border bg-light">Adviser:  <b>{{ $section->adviser }}</b></div>
+    </div>
+    <div class="col-4">
+    <div class="p-3 border bg-light">Year:  <b>{{ $section->year }}</b></div>
+    </div>
+    <div class="col-4">
+      <div class="p-3 border bg-light">Section:  <b>{{ $section->section }}</b></div>
+    </div>
+  </div>
+</div>
+            </div>  
+          </div>
+
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-fw fa-user"></i> Subject</h6>
             </div>
             <div class="card-body">
             <div class="d-flex justify-content-between">
-              <a class="btn btn-success mb-3" href="{{ route('user.new') }}"><i class="fas fa-fw fa-plus-square"></i></a>        
+              <a class="btn btn-success mb-3" href="{{ route('allocate_classroom.new', $section->id) }}"><i class="fas fa-fw fa-plus-square"></i></a>        
             </div>
               <div class="table-responsive">
               <div class="container">
@@ -16,8 +38,13 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Name</th>
-                            <th>Username</th>
+                            <th>Room No.</th>
+                            <th>Instructor</th>
+                            <th>Days</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Subject</th>
+                            <th>Status</th>
                             <th width="100px">Action</th>
                         </tr>
                     </thead>
@@ -49,50 +76,29 @@
     </div>
 </div>
 
+
+
 <script type="text/javascript">
 
 
 $(document).ready(function(){
 
-// Delete action
-$(document).on('click', '.deleteButton', function(){
-    user_id = $(this).attr('id');
-    $('#deleteModal').modal('show');
-});
-
-$('#ok_button').click(function(){
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        type:'DELETE',
-        url:"/user/" + user_id + '/delete',
-    });
-        $.ajax({
-            beforeSend:function(){
-                $('#ok_button').text('Deleting...');
-                setTimeout(function(){
-                $('#deleteModal').modal('hide');
-                window.location.reload();
-            }, 1000);
-            },
-        
-    });
-});
 
     var table = $('.data-table').DataTable({
       processing: true,
       serverSide: true,
       columns: [
           { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-          { data: 'name', name: 'name' },
-          { data: 'username', name: 'username' },
+          { data: 'room_no', name: 'room_no' },
+          { data: 'teacher', name: 'teacher' },
+          { data: 'days', name: 'days' },
+          { data: 'start_time', name: 'start_time' },
+          { data: 'end_time', name: 'end_time' },
+          { data: 'subject', name: 'subject' },
+          { data: 'status', name: 'status' },
           { data: 'action', name: 'action', orderable: false, searchable: false},
       ]
   });
-
-
-    var user_id;
 
 
 

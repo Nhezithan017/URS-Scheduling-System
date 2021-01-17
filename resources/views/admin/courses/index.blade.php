@@ -4,11 +4,11 @@
 @include('layouts.success')
 <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-fw fa-user"></i> Users</h6>
+                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-building"></i> Department</h6>
             </div>
             <div class="card-body">
             <div class="d-flex justify-content-between">
-              <a class="btn btn-success mb-3" href="{{ route('user.new') }}"><i class="fas fa-fw fa-plus-square"></i></a>        
+              <a class="btn btn-success mb-3" href="{{ route('course.new') }}"><i class="fas fa-fw fa-plus-square"></i></a>        
             </div>
               <div class="table-responsive">
               <div class="container">
@@ -16,14 +16,16 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Name</th>
-                            <th>Username</th>
+                            <th>Description</th>
+                            <th>SY-Start</th>
+                            <th>SY-End</th>
+                            <th>Semester</th>
                             <th width="100px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
-                </table>
+                </table>    
                 </div>
               </div>
             </div>  
@@ -39,7 +41,7 @@
                 <h2 class="modal-title">Confirmation</h2>
             </div>
             <div class="modal-body">
-                <h4 align="center" style="margin:0;">Are you sure you want to remove this user?</h4>
+                <h4 align="center" style="margin:0;">Are you sure you want to remove this course?</h4>
             </div>
             <div class="modal-footer">
                 <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
@@ -49,14 +51,16 @@
     </div>
 </div>
 
+
+
 <script type="text/javascript">
 
 
 $(document).ready(function(){
 
-// Delete action
+    // Delete action
 $(document).on('click', '.deleteButton', function(){
-    user_id = $(this).attr('id');
+    course_id = $(this).attr('id');
     $('#deleteModal').modal('show');
 });
 
@@ -66,7 +70,7 @@ $('#ok_button').click(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type:'DELETE',
-        url:"/user/" + user_id + '/delete',
+        url:"/course/" + course_id + '/delete',
     });
         $.ajax({
             beforeSend:function(){
@@ -83,16 +87,16 @@ $('#ok_button').click(function(){
     var table = $('.data-table').DataTable({
       processing: true,
       serverSide: true,
+      ajax: "{{ route('courses.index') }}",
       columns: [
           { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-          { data: 'name', name: 'name' },
-          { data: 'username', name: 'username' },
+          { data: 'description', name: 'description' },
+          { data: 'sy_start', name: 'sy_start' },
+          { data: 'sy_end', name: 'sy_end' },
+          { data: 'semester', name: 'semester' },
           { data: 'action', name: 'action', orderable: false, searchable: false},
       ]
   });
-
-
-    var user_id;
 
 
 

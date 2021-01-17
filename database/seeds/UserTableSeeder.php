@@ -19,13 +19,13 @@ class UserTableSeeder extends Seeder
             'name' => 'Jonathan Bartolome',
         	'username' => 'Admin',
             'password' => bcrypt('p@ssword'),
-            'email' => 'ahproh661@gmail.com'
+           
        ],
        [
         'name' => 'Agnes Vismonte',
         'username' => 'Dean',
         'password' => bcrypt('p@ssword'),
-        'email' => 'nheziaynhie@gmail.com'
+        
         ]
        ]);
     }

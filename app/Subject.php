@@ -8,12 +8,9 @@ class Subject extends Model
 {
     protected $guarded = [];
 
-    public function course()
+    public function allocate_classroom()
     {
-        return $this->hasOne('App\Course','id','course_id');
+        return $this->belongsTo('App\AllocateClassroom');
     }
-    public function subjectAssignTo()
-    {
-        return $this->hasOne('App\SubjectAssignTO');
-    } 
+    
 }
