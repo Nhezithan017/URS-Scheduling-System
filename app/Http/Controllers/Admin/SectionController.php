@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Section;
 use App\Subject;
+use App\Teacher;
 use Yajra\DataTables\DataTables;
 class SectionController extends Controller
 {
@@ -28,12 +29,17 @@ class SectionController extends Controller
                             $subject = Subject::find($row->subject_id);
                             return $subject->description . ' (' . $subject->code . ')';
                     })
+                    ->addColumn('instructor', function($row){
+                            
+                        $instructor = Teacher::find($row->teacher_id);
+                        return $instructor->name;
+                     })
                     ->addColumn('status', function($row){
                             
-                                return '<h5><span class="badge badge-secondary">' . $row->status ? 'ok' : 'not' . '</span></h5>';
+                                return $row->status === 1 ? 'ok' : 'not';
                             
                                     
-                })
+                     })
                     ->addColumn('action', function($row){
                         $btn = '<div class="btn-group" role="group" aria-label="Basic example">
                             <a href="'. route('allocate_classroom.show', $row->id) .'" class="btn btn-success"><i class="fas fa-edit"></i></a>
@@ -44,6 +50,7 @@ class SectionController extends Controller
                             // '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
                             return $btn;
                     })
+                    ->rawColumns(['instructor'])
                     ->rawColumns(['subject'])
                     ->rawColumns(['status'])
                     ->rawColumns(['action'])

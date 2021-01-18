@@ -45,6 +45,9 @@
                     
                             </div>
                     </div> 
+                    <div class="form-group">
+                                    {!! Form::select('roles[]', $roles, $modify === 1 ? $user_role : '', array('class' => 'form-control ','select')) !!}
+                                        </div>
                     <div class="justify-content-between">
                     <a type="button" href="{{ route('users.index') }}" class="btn btn-danger">Cancel</a>
                             <button type="submit" class="btn btn-primary">Save</button>

@@ -28,6 +28,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('user/{id}', 'Admin\UserController@updateUser')->name('user.update');
     Route::delete('user/{id}/delete', 'Admin\UserController@deleteUser')->name('user.delete');
 
+    //Roles
+    Route::get('roles', 'Admin\RoleController@getRoles')->name('role.index');
+    Route::get('role/create', 'Admin\RoleController@createRole')->name('role.new');
+    Route::post('role/create', 'Admin\RoleController@createRole')->name('role.create');
+    Route::get('role/{id}', 'Admin\RoleController@showRole')->name('role.show');
+    Route::post('role/{id}', 'Admin\RoleController@updateRole')->name('role.update');
+    Route::delete('role/{id}/delete', 'Admin\RoleController@deleteRole')->name('role.delete');
 
     //Courses
     Route::get('courses', 'Admin\CourseController@getCourses')->name('courses.index');
@@ -51,8 +58,23 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('allocate_classroom/create/{section}', 'Admin\AllocateClassroomController@createAllocateClassRoom')->name('allocate_classroom.create');
     Route::get('allocate_classroom/{id}', 'Admin\AllocateClassroomController@showAllocateClassRoom')->name('allocate_classroom.show');
     Route::post('allocate_classroom/{id}', 'Admin\AllocateClassroomController@updatellocateClassRoom')->name('allocate_classroom.update');
+    Route::delete('allocate_classroom/{id}/delete', 'Admin\AllocateClassroomController@deleteAllocateClassRoom')->name('allocate_classroom.delete');
 
+    //Instructor
+    Route::get('instructors', 'Admin\TeacherController@getInstructor')->name('instructor.index');
+    Route::get('instructor/create', 'Admin\TeacherController@createInstructor')->name('instructor.new');
+    Route::post('instructor/create', 'Admin\TeacherController@createInstructor')->name('instructor.create');
+    Route::get('instructor/{id}', 'Admin\TeacherController@showInstructor')->name('instructor.show');
+    Route::post('instructor/{id}', 'Admin\TeacherController@updateInstructor')->name('instructor.update');
+    Route::delete('instructor/{id}/delete', 'Admin\TeacherController@deleteInstructor')->name('instructor.delete');
 
+    //Subjects
+    Route::get('subjects', 'Admin\SubjectController@getSubject')->name('subject.index');
+    Route::get('subject/create', 'Admin\SubjectController@createSubject')->name('subject.new');
+    Route::post('subject/create', 'Admin\SubjectController@createSubject')->name('subject.create');
+    Route::get('subject/{id}', 'Admin\SubjectController@showSubject')->name('subject.show');
+    Route::post('subject/{id}', 'Admin\SubjectController@updateSubject')->name('subject.update');
+    Route::delete('subject/{id}/delete', 'Admin\SubjectController@deleteSubject')->name('subject.delete');
 });
 
 Route::group(['middleware' => 'guest'], function(){

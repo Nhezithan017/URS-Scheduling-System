@@ -26,7 +26,7 @@
 
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-fw fa-user"></i> Subject</h6>
+                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-fw fa-user"></i> Allocate Room</h6>
             </div>
             <div class="card-body">
             <div class="d-flex justify-content-between">
@@ -66,7 +66,7 @@
                 <h2 class="modal-title">Confirmation</h2>
             </div>
             <div class="modal-body">
-                <h4 align="center" style="margin:0;">Are you sure you want to remove this user?</h4>
+                <h4 align="center" style="margin:0;">Are you sure you want to remove this allocate of room?</h4>
             </div>
             <div class="modal-footer">
                 <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
@@ -83,6 +83,32 @@
 
 $(document).ready(function(){
 
+  var allocate_classroom;
+  $(document).on('click', '.deleteButton', function(){
+    allocate_classroom = $(this).attr('id');
+    $('#deleteModal').modal('show');
+});
+
+$('#ok_button').click(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type:'DELETE',
+        url:"/allocate_classroom/" + allocate_classroom + '/delete',
+    });
+        $.ajax({
+            beforeSend:function(){
+                $('#ok_button').text('Deleting...');
+                setTimeout(function(){
+                $('#deleteModal').modal('hide');
+                window.location.reload();
+            }, 1000);
+            },
+        
+    });
+});
+
 
     var table = $('.data-table').DataTable({
       processing: true,
@@ -90,7 +116,7 @@ $(document).ready(function(){
       columns: [
           { data: 'DT_RowIndex', name: 'DT_RowIndex' },
           { data: 'room_no', name: 'room_no' },
-          { data: 'teacher', name: 'teacher' },
+          { data: 'instructor', name: 'instructor' },
           { data: 'days', name: 'days' },
           { data: 'start_time', name: 'start_time' },
           { data: 'end_time', name: 'end_time' },

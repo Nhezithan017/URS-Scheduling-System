@@ -19,7 +19,8 @@ class CreateAllocateClassroomsTable extends Migration
         Schema::create('allocate_classrooms', function (Blueprint $table) {
             $table->increments('id');
             $table->string('room_no');
-            $table->string('teacher');
+            $table->integer('teacher_id')->unsigned();
+            $table->foreign('teacher_id')->references('id')->on('teachers');
             $table->json('days');
             $table->time('start_time');
             $table->time('end_time');

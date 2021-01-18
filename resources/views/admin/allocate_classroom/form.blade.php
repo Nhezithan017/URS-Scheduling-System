@@ -19,31 +19,55 @@
                     @csrf
                 
               <div class="row">
-                    <div class="col">
+                    <div class="col-6">
                         <div class="form-group">
-                        <label for="" class="form-label">Room No.</label>
-                            <input type="text" class="form-control" name="room_no" placeholder="{{ __('Room No') }}" value="{{ $allocate_classroom->room_no ?? old('room_no') }}"  autofocus>
+                        <label>Room No :</label><br/>
+                                    <select class="selectrooms"  data-live-search="true" name="room_no">
+                                        <option disabled selected>--Select Room No--</option>
+                                        @foreach ($rooms as $value)
+                                                <option value="{{ $value }}"
+                                                
+                                                @if ($allocate_classroom->room_no ?? '' === $value)
+                                                        selected="selected"
+                                                @endif
+                                                >{{ $value }}</option>
+                                        @endforeach
+
+                                    </select>    
                         </div>
             
                     </div>  
+
+                    <div class="col-6">
+                        <div class="form-group">
+                        <label>Instructor :</label><br/>
+                                    <select class="selectinstructor"  data-live-search="true" name="teacher_id">
+                                                <option disabled selected>--Select Instructor--</option>
+                                        @foreach ($instructors as $value)
+                                                <option value="{{ $value->id }}"
+                                                
+                                                @if ($allocate_classroom->teacher_id ?? '' === $value->id)
+                                                        selected="selected"
+                                                @endif
+                                                >{{ $value->name }}</option>
+                                        @endforeach
+
+                                    </select>    
+                        </div>
+            
+                    </div>  
+
               </div> 
 
-              <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                        <label for="" class="form-label">Instructor</label>
-                            <input type="text" class="form-control" name="teacher" placeholder="{{ __('Instructor') }}" value="{{ $allocate_classroom->teacher ?? old('teacher') }}"  autofocus>
-                        </div>
-            
-                    </div>  
-              </div> 
 
                     <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                <label>Select Days :</label><br/>
+                                <label>Select Days </label><br/>
                                     <select class="selectpicker" multiple data-live-search="true" name="days[]">
+                                    
                                         @foreach ($days as $key => $value)
+                                       
                                                 <option value="{{ $key }}"
                                                 
                                                 @if (in_array($key, $allocate_classroom->days ?? [] ))
@@ -57,11 +81,12 @@
                             </div>
                             <div class="col-6">
                             <div class="form-group">
-                            <label>Select Subject :</label><br/>
+                            <label>Subject :</label><br/>
                                     <select class="selectsubject"  data-live-search="true" name="subject_id">
+                                                    <option disabled selected>--Select  Subject--</option>
                                                     @foreach($subjects as $sub)
                                                     <option value="{{ $sub->id }}"
-                                                            @if ($allocate_classroom->subject_id ?? '' == $sub->id)
+                                                            @if ($allocate_classroom->subject_id ?? '' === $sub->id)
                                                                     selected="selected"
                                                             @endif
                                                             >{{ $sub->description }}</option>
@@ -89,11 +114,11 @@
                              <label for="" class="form-label">End Time:</label>                           
                                 <input type="text" value="{{ $allocate_classroom->end_time ?? old('end_time') }}" class="form-control" id="end_time" data-format="hh:mm:ss" data-template="hh:mm:ss" name="end_time">
                             </div>
-                        </div>
+                        </div>  
                     </div>
                     
                     <div class="justify-content-between">
-                    <a type="button" href="{{ route('courses.index') }}" class="btn btn-danger">Cancel</a>
+                    <a type="button" href="{{ url("/section/{$section_id}/show") }}" class="btn btn-danger">Cancel</a>
                             <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                     </form>
@@ -117,6 +142,8 @@
     });
         $('select').selectpicker();
         $('.selectsubject').selectpicker();
+        $('.selectrooms').selectpicker();
+        $('.selectinstructor').selectpicker();
     });
 
 </script>

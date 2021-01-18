@@ -37,7 +37,7 @@
                                                 @foreach ($section as $value)
                                                         <option value="{{ $value }}"
                                                         
-                                                        @if ($value  == $sections->section ?? '')
+                                                        @if ($sections->section ?? '' == $value)
                                                                 selected="selected"
                                                         @endif
                                                         >{{ $value }}</option>
@@ -55,7 +55,7 @@
                                              @foreach ($year as $value)
                                                         <option value="{{ $value }}"
                                                         
-                                                        @if ( $value == $sections->year ?? '')
+                                                        @if ($sections->year ?? '' == $value)
                                                                 selected="selected"
                                                         @endif
                                                         >{{ $value }}</option>

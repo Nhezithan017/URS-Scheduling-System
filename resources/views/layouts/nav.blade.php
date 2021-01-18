@@ -10,7 +10,7 @@
 <li class="nav-item">
 
 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#departmentProfile" aria-expanded="true" aria-controls="collapseUtilities">
-<i class="fas fa-fw fa-users"></i>
+<i class="fas fa-fw fa-user"></i>
   <span>Department Profile</span>
 </a>
 
@@ -26,7 +26,7 @@
 <!-- User  -->
 <li class="nav-item">
 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-<i class="fas fa-fw fa-user"></i>
+<i class="fas fa-fw fa-users"></i>
   <span>User Management</span>
 </a>
 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -37,6 +37,22 @@
   </div>  
 </div>
 </li>
+
+
+<!-- Teacher  -->
+<li class="nav-item">
+<a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#roles" aria-expanded="true" aria-controls="collapseUtilities">
+<i class="fas fa-shield-alt"></i>
+  <span>Roles</span>
+</a>
+<div id="roles" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+  <div class="bg-white py-2 collapse-inner rounded">
+    <h6 class="collapse-header">Custom Utilities:</h6>
+    <a class="collapse-item" href="{{ route('role.index') }}">Role</a> 
+  </div>  
+</div>
+</li>
+
 
 <!-- Tools  -->
 <li class="nav-item">
@@ -61,7 +77,21 @@
 <div id="subject" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
   <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">Custom Utilities:</h6>
-    <a class="collapse-item" href="">Subject</a> 
+    <a class="collapse-item" href="{{ route('subject.index') }}">Subject</a> 
+  </div>  
+</div>
+</li>
+
+<!-- Teacher  -->
+<li class="nav-item">
+<a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#teacher" aria-expanded="true" aria-controls="collapseUtilities">
+<i class="fas fa-chalkboard-teacher"></i>
+  <span>Instructors</span>
+</a>
+<div id="teacher" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+  <div class="bg-white py-2 collapse-inner rounded">
+    <h6 class="collapse-header">Custom Utilities:</h6>
+    <a class="collapse-item" href="{{ route('instructor.index') }}">Instructor</a> 
   </div>  
 </div>
 </li>

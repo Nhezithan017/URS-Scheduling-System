@@ -18,6 +18,7 @@
                             <th>No</th>
                             <th>Name</th>
                             <th>Username</th>
+                            <th>Role</th>
                             <th width="100px">Action</th>
                         </tr>
                     </thead>
@@ -87,6 +88,7 @@ $('#ok_button').click(function(){
           { data: 'DT_RowIndex', name: 'DT_RowIndex' },
           { data: 'name', name: 'name' },
           { data: 'username', name: 'username' },
+          {data: 'role', name: 'role' },
           { data: 'action', name: 'action', orderable: false, searchable: false},
       ]
   });

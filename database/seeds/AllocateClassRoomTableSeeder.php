@@ -14,22 +14,22 @@ class AllocateClassRoomTableSeeder extends Seeder
     public function run()
     {
 
-        $data = [];
-        $data = ['M','W','F'];
+    
+
         AllocateClassroom::create([
             [
                 'room_no' => 'AB-1',
                 'teacher' => 'Joriz Chiong',
-                'days' => $data,
-                'start_time' => Carbon::now()->format('H:i:s'),
-                'start_end' => Carbon::now()->format('H:i:s'),
+                'days' => "['M','W','F']",
+                'start_time' => Carbon::now()->format('H:i'),
+                'start_end' => Carbon::now()->format('H:i'),
                 'subject_id' => 1,
                 'section_id' => 1
            ],
            [
             'room_no' => 'AC-1',
             'teacher' => 'Manuel Dangan',
-            'days' => $data,
+            'days' => "['M','W','F']",
             'start_time' => Carbon::now()->format('H:i:s'),
             'start_end' => Carbon::now()->format('H:i:s'),
             'subject_id' => 1,

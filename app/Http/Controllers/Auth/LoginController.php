@@ -27,6 +27,9 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/dashboard';    
 
+    protected function username(){
+        return 'username';
+    }
     /**
      * Create a new controller instance.
      *
