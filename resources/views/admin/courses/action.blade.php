@@ -6,7 +6,7 @@
 <a href="{{ route('courses.show', $row->id) }}" class="btn btn-primary"><i class="fas fa-fw fa-plus-square"></i> Section</a>
 @endcan
 @can('course-edit')
-    <a href=" {{ route('section.show', $row->id)  }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+    <a href=" {{ route('course.show', $row->id)  }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
 @endcan
 <input type="hidden" value="{{ $row->id }}" id="userId"/>
 @can('course-delete')
