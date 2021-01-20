@@ -41,7 +41,7 @@
 @endcan
 
 <!-- Teacher  -->
-
+@can('role-list')
 <li class="nav-item">
 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#roles" aria-expanded="true" aria-controls="collapseUtilities">
 <i class="fas fa-shield-alt"></i>
@@ -55,7 +55,7 @@
 </div>
 </li>
 
-
+@endcan
 <!-- Tools  -->
 @can('course-list')
 <li class="nav-item">

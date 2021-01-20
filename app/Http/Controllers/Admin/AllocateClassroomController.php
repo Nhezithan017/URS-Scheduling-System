@@ -42,16 +42,20 @@ class AllocateClassroomController extends Controller
                     'days' => ['required'],
                     'start_time' => ['required'],
                     'end_time' => ['required'],
-                    'subject_id' => 'integer',
-                    'teacher_id'=> 'integer',
+                    'subject_id' => 'required|integer',
+                    'teacher_id'=> 'required|integer',
                     'status' => 'boolean'
-                ]);
+                ],
+            [
+                'teacher_id.required' => 'The instructor field is required',
+                'subject_id.required' => 'The subject field is required'
+            ]);
                 
              $start_time = $request->input('start_time');
              $end_time = $request->input('end_time');
              $days = $request->input('days');
                     
-                       $section->allocate_classroom()->create($data);
+             $section->allocate_classroom()->create($data);
                 
                 return redirect('section/' . $section->id . '/show')
             ->with('success','allocate of room create successfully');
@@ -101,6 +105,10 @@ class AllocateClassroomController extends Controller
                 'subject_id' => 'integer',
                 'teacher_id'=> 'integer',
                 'status' => 'boolean'
+            ],      
+            [
+                'teacher_id.required' => 'The instructor field is required',
+                'subject_id.required' => 'The subject field is required'
             ]);
 
 

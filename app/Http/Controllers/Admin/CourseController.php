@@ -7,6 +7,7 @@ use App\Course;
 use DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use PDF;
 
 class CourseController extends Controller
 {
@@ -37,6 +38,24 @@ class CourseController extends Controller
 
         return view('admin.courses.index');
     }
+
+    public function print($id)
+    {
+        $pdf = app('dompdf.wrapper');
+
+
+        
+        $pdf->getDomPDF()->set_option("enable_php", true);
+
+       $course =  $this->courses->find($id);
+
+        $pdf->loadView('admin.courses.print', compact('course'));
+
+            
+       return $pdf->stream('invoice.pdf');
+    }
+
+  
     public function showCourses(Request $request, Course $course)
     {
 

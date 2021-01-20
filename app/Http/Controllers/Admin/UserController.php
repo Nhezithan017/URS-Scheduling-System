@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use DataTables;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -94,20 +95,21 @@ class UserController extends Controller
 
         if($request->isMethod('post')){
 
-            $this->validate($request, [
+           $data =  $this->validate($request, [
                 'name' => 'required|max:255',
                 'username' => 'required',
-                'password' => 'sometimes|required|max:20',
+                'password' => 'sometimes|required|max:20|',
                 'roles' => 'required'
             ]);
 
-
+         
             
             $this->users->find($id)->update([
                 'name' => $request->input('name'),
                 'username' => $request->input('username'),
                 'password' => Hash::make($request->input('password'))
                 ]);
+
             DB::table('model_has_roles')->where('model_id',$id)->delete();
 
             $this->users->find($id)->assignRole($request->input('roles'));

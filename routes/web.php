@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('course/{id}', 'Admin\CourseController@showCourse')->name('course.show');
     Route::post('course/{id}', 'Admin\CourseController@updateCourse')->name('course.update');
     Route::delete('course/{id}/delete', 'Admin\CourseController@deleteCourse')->name('course.delete');
+    Route::get('course/{id}/print', 'Admin\CourseController@print')->name('course.print');
     
     //Section
     Route::get('section/{section}/show', 'Admin\SectionController@showSections')->name('sections.show');
