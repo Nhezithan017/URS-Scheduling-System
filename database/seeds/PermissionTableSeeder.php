@@ -15,13 +15,13 @@ class PermissionTableSeeder extends Seeder
 
         $permissions = [
             
-            // 'role-list',
+            'role-list',
  
-            // 'role-create',
+            'role-create',
  
-            // 'role-edit',
+            'role-edit',
  
-            // 'role-delete',
+            'role-delete',
  
             'user-list',
  
@@ -70,6 +70,8 @@ class PermissionTableSeeder extends Seeder
             'instructor-edit',
  
             'instructor-delete',
+
+            'audit-list',
 
          ];
  
@@ -193,6 +195,10 @@ class PermissionTableSeeder extends Seeder
                 ],
                 [
                     'permission_id' => 28,
+                    'role_id'=> 1
+                ],
+                [
+                    'permission_id' => 29,
                     'role_id'=> 1
                 ],
          ]);

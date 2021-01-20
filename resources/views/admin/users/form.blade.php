@@ -46,6 +46,7 @@
                             </div>
                     </div> 
                     <div class="form-group">
+                
                                     {!! Form::select('roles[]', $roles, $modify === 1 ? $user_role : '', array('class' => 'form-control ','select')) !!}
                                         </div>
                     <div class="justify-content-between">

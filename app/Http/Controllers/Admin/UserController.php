@@ -53,16 +53,17 @@ class UserController extends Controller
 
             $data = $this->validate($request, [
                 'name' => 'required|max:255',
-                'username' => 'required',
+                'username' => 'required|unique:users',
                 'password' => 'required|max:20',
                 'roles' => 'required'
             ]);
 
-          $user_role = $user->insert([
+          $user_role = $user->create([
             'name' => $request->input('name'),
             'username' => $request->input('username'),
             'password' => Hash::make($request->input('password'))
           ]);
+
           $user_role->assignRole($request->input('roles'));
             return redirect('users')
         ->with('success','User create successfully');

@@ -75,6 +75,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('subject/{id}', 'Admin\SubjectController@showSubject')->name('subject.show');
     Route::post('subject/{id}', 'Admin\SubjectController@updateSubject')->name('subject.update');
     Route::delete('subject/{id}/delete', 'Admin\SubjectController@deleteSubject')->name('subject.delete');
+
+    //Audit
+    Route::get('audit', 'Admin\AuditController@getAudit')->name('audit.index');
 });
 
 Route::group(['middleware' => 'guest'], function(){

@@ -15,7 +15,10 @@
         "laravel/tinker": "^1.0",
         "yajra/laravel-datatables-oracle": "^9.15",
         "spatie/laravel-permission": "^3.6",
-        "laravelcollective/html": "^5.0"
+        "laravelcollective/html": "^5.0",
+        "barryvdh/laravel-dompdf": "^0.8.6",
+        "brotzka/laravel-dotenv-editor": "^2.1",
+        "spatie/laravel-activitylog": "^3.9"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
