@@ -12,6 +12,12 @@ class CourseController extends Controller
 {
     public function __construct(Course $courses, DataContent $data_content)
     {
+        $this->middleware('permission:course-list', ['only' => ['getCourses','deleteCourse','createCourse']]);
+        $this->middleware('permission:section-list', ['only' => ['showCourses']]);
+        $this->middleware('permission:course-create', ['only' => ['createCourse']]);
+        $this->middleware('permission:course-edit', ['only' => ['showCourse','updateCourse']]);
+        $this->middleware('permission:course-delete', ['only' => ['deleteCourse']]);
+
         $this->courses = $courses;
         $this->semester = $data_content->semester;
         $this->department = $data_content->department;
@@ -23,15 +29,7 @@ class CourseController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<div class="btn-group" role="group" aria-label="Basic example">
-                            <a href="'. route('courses.show', $row->id) .'" class="btn btn-primary"><i class="fas fa-fw fa-plus-square"></i> Section</a>
-                            <a href="'. route('course.show', $row->id) .'" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                            <input type="hidden" value="'. $row->id .'" id="userId"/>
-                            <button type="button" name="deleteButton" id="' . $row->id . '" class="btn btn-danger  deleteButton"><i class="fas fa-trash-alt"></i></button>
-                        </div>';
-
-                            // '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                            return $btn;
+                        return view('admin.courses.action', compact('row'))->render();
                     })
                     ->rawColumns(['action'])
                     ->make(true);
@@ -47,15 +45,7 @@ class CourseController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<div class="btn-group" role="group" aria-label="Basic example">
-                            <a href="'. route('sections.show', $row->id) .'" class="btn btn-primary"><i class="fas fa-fw fa-plus-square"></i> Subject</a>
-                            <a href="'. route('section.show', $row->id) .'" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                            <input type="hidden" value="'. $row->id .'" id="userId"/>
-                            <button type="button" name="deleteButton" id="' . $row->id . '" class="btn btn-danger  deleteButton"><i class="fas fa-trash-alt"></i></button>
-                        </div>';
-
-                            // '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                            return $btn;
+                        return view('admin.sections.action', compact('row'))->render();
                     })
                     ->rawColumns(['action'])
                     ->make(true);

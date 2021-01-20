@@ -13,6 +13,11 @@ class SubjectController extends Controller
   
     public function __construct(Subject $subjects, DataContent $data_content)
     {
+        $this->middleware('permission:subject-list', ['only' => ['getSubject','deleteSubject','showSubject']]);
+        $this->middleware('permission:subject-create', ['only' => ['createSubject']]);
+        $this->middleware('permission:subject-edit', ['only' => ['showSubject','updateSubject']]);
+        $this->middleware('permission:subject-delete', ['only' => ['deleteSubject']]);
+
         $this->lec = $data_content->lec;
         $this->lab = $data_content->lab;
         $this->unit = $data_content->unit;
@@ -25,14 +30,7 @@ class SubjectController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<div class="btn-group" role="group" aria-label="Basic example">
-                            <a href="' . route('subject.show', $row->id)  .'" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                            <input type="hidden" value="'. $row->id .'" id="userId"/>
-                            <button type="button" name="deleteButton" id="' . $row->id . '" class="btn btn-danger  deleteButton"><i class="fas fa-trash-alt"></i></button>
-                        </div>';
-
-                            // '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                            return $btn;
+                        return view('admin.subjects.action', compact('row'))->render();
                     })
                     ->rawColumns(['action'])
                     ->make(true);

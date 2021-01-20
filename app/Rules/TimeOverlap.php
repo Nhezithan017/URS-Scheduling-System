@@ -28,16 +28,10 @@ class TimeOverlap implements Rule
     {
         
         $time_laps = AllocateClassroom::where('start_time', '<=', $value)
-                                ->where('end_time','>=', $value)
+                                ->where('end_time','>=', $value)                                
                                 ->count() == 0;
 
-        $days_laps = AllocateClassroom::where('days', '==', $value)->get();
-
-        if($time_laps && $days_laps){
-            return true;
-        }else{
-            return false;
-        }
+      
     }
 
     /**

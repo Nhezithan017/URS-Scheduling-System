@@ -10,6 +10,10 @@ class TeacherController extends Controller
 {
     public function __construct(Teacher $instructors)
     {
+        $this->middleware('permission:instructor-list', ['only' => ['getInstructor','deleteInstructor','showInstructor']]);
+        $this->middleware('permission:instructor-create', ['only' => ['createInstructor']]);
+        $this->middleware('permission:instructor-edit', ['only' => ['showInstructor','updateInstrutor']]);
+        $this->middleware('permission:instructor-delete', ['only' => ['deleteInstructor']]);
         $this->instructors = $instructors;
     }
     public function getInstructor(Request $request){
@@ -19,14 +23,7 @@ class TeacherController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<div class="btn-group" role="group" aria-label="Basic example">
-                            <a href="' . route('instructor.show', $row->id)  .'" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                            <input type="hidden" value="'. $row->id .'" id="userId"/>
-                            <button type="button" name="deleteButton" id="' . $row->id . '" class="btn btn-danger  deleteButton"><i class="fas fa-trash-alt"></i></button>
-                        </div>';
-
-                            // '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                            return $btn;
+                        return view('admin.instructors.action', compact('row'))->render();
                     })
                     ->rawColumns(['action'])
                     ->make(true);

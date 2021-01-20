@@ -8,7 +8,9 @@
             </div>
             <div class="card-body">
             <div class="d-flex justify-content-between">
+            @can('course-list')
               <a class="btn btn-success mb-3" href="{{ route('course.new') }}"><i class="fas fa-fw fa-plus-square"></i></a>        
+            @endcan
             </div>
               <div class="table-responsive">
               <div class="container">

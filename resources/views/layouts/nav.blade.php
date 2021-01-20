@@ -24,6 +24,7 @@
 
 
 <!-- User  -->
+@can('user-list')
 <li class="nav-item">
 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
 <i class="fas fa-fw fa-users"></i>
@@ -37,9 +38,10 @@
   </div>  
 </div>
 </li>
-
+@endcan
 
 <!-- Teacher  -->
+
 <li class="nav-item">
 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#roles" aria-expanded="true" aria-controls="collapseUtilities">
 <i class="fas fa-shield-alt"></i>
@@ -55,6 +57,7 @@
 
 
 <!-- Tools  -->
+@can('course-list')
 <li class="nav-item">
 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#course" aria-expanded="true" aria-controls="collapseUtilities">
 <i class="fas fa-building"></i> 
@@ -67,8 +70,9 @@
   </div>  
 </div>
 </li>
-
+@endcan
 <!-- Tools  -->
+@can('subject-list')
 <li class="nav-item">
 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#subject" aria-expanded="true" aria-controls="collapseUtilities">
 <i class="fas fa-book-reader"></i>
@@ -81,8 +85,10 @@
   </div>  
 </div>
 </li>
+@endcan
 
 <!-- Teacher  -->
+@can('instructor-list')
 <li class="nav-item">
 <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#teacher" aria-expanded="true" aria-controls="collapseUtilities">
 <i class="fas fa-chalkboard-teacher"></i>
@@ -95,6 +101,6 @@
   </div>  
 </div>
 </li>
-
+@endcan
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">

@@ -6,19 +6,19 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\Controller;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 class RoleController extends Controller
 {
-   public function __construct()
+   public function __construct(Role $roles)
 
     {
 
-     //     $this->middleware('permission:role-list', ['only' => ['getRoles']]);
-         $this->middleware('permission:role-create', ['only' => ['create','store']]);
-         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
-
+        //  $this->middleware('permission:role-list', ['only' => ['getRoles','deleteRole','showRole']]);
+        //  $this->middleware('permission:role-create', ['only' => ['createRole']]);
+        //  $this->middleware('permission:role-edit', ['only' => ['showRole','updateRole']]);
+        //  $this->middleware('permission:role-delete', ['only' => ['deleteRole']]);
+        $this->roles = $roles;
 
     }
     public function getRoles(Request $request){
@@ -28,14 +28,7 @@ class RoleController extends Controller
          return Datatables::of($data)
                  ->addIndexColumn()
                  ->addColumn('action', function($row){
-                     $btn = '<div class="btn-group" role="group" aria-label="Basic example">
-                         <a href="' . route('user.show', $row->id)  .'" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                         <input type="hidden" value="'. $row->id .'" id="userId"/>
-                         <button type="button" name="deleteButton" id="' . $row->id . '" class="btn btn-danger  deleteButton"><i class="fas fa-trash-alt"></i></button>
-                     </div>';
-
-                         // '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                         return $btn;
+                    return view('admin.roles.action', compact('row'))->render();
                  })
                  ->rawColumns(['action'])
                  ->make(true);
@@ -57,9 +50,9 @@ public function createRole(Request $request, Role $role)
           'permission' => 'required',
         ]);
 
-      $role = $role->create(['name' => $request->input('name')]);
+      $role_permission = $role->create(['name' => $request->input('name')]);
 
-      $role->syncPermissions($request->input('permission'));
+      $role_permission->syncPermissions($request->input('permission'));
         return redirect('roles')
     ->with('success','Role create successfully');
     }
@@ -68,23 +61,31 @@ public function createRole(Request $request, Role $role)
     $data['roles'] = Role::pluck('name', 'name')->all();
     $data['permission'] = Permission::get();
 
-    return view('admin.users.form', $data);
+
+    
+
+    return view('admin.roles.form', $data);
 }
 
-public function showUser($id, Request $request)
+public function showRole($id, Request $request)
 {
     $data = [];
     $data['modify'] = 1;
-    $data['user_id'] = $id;
+    $data['role_id'] = $id;
 
-    $data['user'] = $this->users->find($id);
-     $data['permission'] = Permission::get();
+    $data['role'] = $this->roles->find($id);
+    
+    $data['permission'] = Permission::get();
     $data['roles'] = Role::pluck('name', 'name')->all();
-    $data['user_role'] = $data['user']->roles->pluck('name','name')->all();
+   
 
-    return view('admin.users.form', $data);
+    $data['role_permissions'] = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
+    ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+    ->all();
+
+    return view('admin.roles.form', $data);
 }
-public function updateUser(Request $request, $id, User $user)
+public function updateRole(Request $request, $id, Role $role)
 {
 
     $data = [];
@@ -92,28 +93,28 @@ public function updateUser(Request $request, $id, User $user)
     if($request->isMethod('post')){
 
         $data = $this->validate($request, [
-            'name' => 'required|max:255',
-            'username' => 'required',
-            'password' => 'sometimes|required|max:20'
+            'name' => 'required',
+            'permission' => 'required',
         ]);
 
 
+        $role = $this->roles->find($id);
+
+        $role->name  = $request->input('name');
+        $role->save();
+        $role->syncPermissions($request->input('permission'));
         
-        $this->users->find($id)->update($data);
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
-
-        $this->users->find($id)->assignRole($request->input('roles'));
-
-        return redirect('users')
-    ->with('success','User Update successfully');
-    }
+       
+        return redirect('roles')
+    ->with('success','Role Update successfully');
+    }   
 }
 
-public function deleteUser($id){
+public function deleteRole($id){
 
-    $this->users->find($id)->delete($id);
+    $this->roles->find($id)->delete($id);
 
-    return redirect()->route('users.index')
-    ->with('success','User deleted successfully');
+    return redirect()->route('role.index')
+    ->with('success','Role deleted successfully');
 }
 }

@@ -116,7 +116,19 @@
                             </div>
                         </div>  
                     </div>
-                    
+                  @if(auth()->id() === 1)
+                    <div class="form-group">
+                                    <label class="form-group-label d-block"> <strong>Status:</strong></label>
+                                        <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="status" id="inlineRadio1" value="1" {{ $modify === 1 ? ($allocate_classroom->status ? 'checked' : '') : '' }} checked>
+                                        <label class="form-check-label" for="inlineRadio1">Approve</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="status" id="inlineRadio2" value="0" {{ $modify === 1 ? (!$allocate_classroom->status ? 'checked' : '') : ''}}>
+                                        <label class="form-check-label" for="inlineRadio2">Dis-Approve</label>
+                                        </div>
+                                    </div>
+                    @endif
                     <div class="justify-content-between">
                     <a type="button" href="{{ url("/section/{$section_id}/show") }}" class="btn btn-danger">Cancel</a>
                             <button type="submit" class="btn btn-primary">Save</button>

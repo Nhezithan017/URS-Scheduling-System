@@ -3,6 +3,9 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserTableSeeder extends Seeder
 {
@@ -14,19 +17,25 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         
-       DB::table('users')->insert([
-        [
+        $user = User::create([
             'name' => 'Jonathan Bartolome',
         	'username' => 'Admin',
-            'password' => bcrypt('p@ssword'),
-           
-       ],
-       [
-        'name' => 'Agnes Vismonte',
-        'username' => 'Dean',
-        'password' => bcrypt('p@ssword'),
-        
-        ]
-       ]);
+            'password' => Hash::make('p@ssword'),
+        ]);
+
+       
+       $role = Role::create(['name' => 'Admin']);
+
+   
+
+        $permissions = Permission::pluck('id','id')->all();
+
+  
+
+        $role->syncPermissions($permissions);
+
+   
+
+        $user->assignRole([$role->id]);
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use DataTables;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,6 +15,10 @@ class UserController extends Controller
 {
     public function __construct(User $users)
     {
+        $this->middleware('permission:user-list', ['only' => ['getUsers','deleteUser','showUser']]);
+        $this->middleware('permission:user-create', ['only' => ['createUser']]);
+        $this->middleware('permission:user-edit', ['only' => ['show','updateUser']]);
+        $this->middleware('permission:user-delete', ['only' => ['deleteUser']]);
         $this->users = $users;
     }
     public function getUsers(Request $request){
@@ -29,14 +34,7 @@ class UserController extends Controller
                         
                     })
                     ->addColumn('action', function($row){
-                        $btn = '<div class="btn-group" role="group" aria-label="Basic example">
-                            <a href="' . route('user.show', $row->id)  .'" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                            <input type="hidden" value="'. $row->id .'" id="userId"/>
-                            <button type="button" name="deleteButton" id="' . $row->id . '" class="btn btn-danger  deleteButton"><i class="fas fa-trash-alt"></i></button>
-                        </div>';
-
-                            // '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                            return $btn;
+                        return view('admin.users.action', compact('row'))->render();
                     })
                     ->rawColumns(['role'])
                     ->rawColumns(['action'])
@@ -60,7 +58,11 @@ class UserController extends Controller
                 'roles' => 'required'
             ]);
 
-          $user_role = $user->insert($data);
+          $user_role = $user->insert([
+            'name' => $request->input('name'),
+            'username' => $request->input('username'),
+            'password' => Hash::make($request->input('password'))
+          ]);
           $user_role->assignRole($request->input('roles'));
             return redirect('users')
         ->with('success','User create successfully');
@@ -91,15 +93,20 @@ class UserController extends Controller
 
         if($request->isMethod('post')){
 
-            $data = $this->validate($request, [
+            $this->validate($request, [
                 'name' => 'required|max:255',
                 'username' => 'required',
-                'password' => 'sometimes|required|max:20'
+                'password' => 'sometimes|required|max:20',
+                'roles' => 'required'
             ]);
 
 
             
-            $this->users->find($id)->update($data);
+            $this->users->find($id)->update([
+                'name' => $request->input('name'),
+                'username' => $request->input('username'),
+                'password' => Hash::make($request->input('password'))
+                ]);
             DB::table('model_has_roles')->where('model_id',$id)->delete();
 
             $this->users->find($id)->assignRole($request->input('roles'));

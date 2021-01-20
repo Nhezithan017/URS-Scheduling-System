@@ -29,7 +29,9 @@
 
           <div class="card shadow mb-4">
             <div class="card-header py-3">
+            @can('section-create')
                 <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-fw fa-user"></i> Section</h6>
+            @endcan
             </div>
             <div class="card-body">
             <div class="d-flex justify-content-between">

@@ -14,6 +14,11 @@ class SectionController extends Controller
 {
     public function __construct(Section $sections, DataContent $data_content)
     {
+        $this->middleware('permission:allocate_classroom-list', ['only' => ['showSections']]);
+        $this->middleware('permission:section-create', ['only' => ['createSection']]);
+        $this->middleware('permission:section-edit', ['only' => ['showSection','updateSection']]);
+        $this->middleware('permission:section-delete', ['only' => ['deleteSection']]);
+
         $this->year = $data_content->year; 
         $this->sections = $sections;
         $this->section = $data_content->section;   
