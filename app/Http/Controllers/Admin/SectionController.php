@@ -12,7 +12,7 @@ use App\Teacher;
 use Yajra\DataTables\DataTables;
 class SectionController extends Controller
 {
-    public function __construct(Section $sections, DataContent $data_content)
+    public function __construct(Section $sections, DataContent $data_content, Teacher $instructors)
     {
         $this->middleware('permission:allocate_classroom-list', ['only' => ['showSections']]);
         $this->middleware('permission:section-create', ['only' => ['createSection']]);
@@ -21,7 +21,8 @@ class SectionController extends Controller
 
         $this->year = $data_content->year; 
         $this->sections = $sections;
-        $this->section = $data_content->section;   
+        $this->section = $data_content->section;
+        $this->instructors = $instructors;   
     }
     
     public function showSections(Request $request, Section $section)
@@ -89,7 +90,7 @@ class SectionController extends Controller
         $data['modify'] = 0;
         $data['year'] = $this->year;
         $data['section'] = $this->section;
-        
+        $data['instructors'] = $this->instructors->latest()->get();
         return view('admin.sections.form', $data);
     }
  
@@ -107,7 +108,7 @@ class SectionController extends Controller
         $data['year'] = $this->year;
          
         $data['section'] = $this->section;
-
+        $data['instructors'] = $this->instructors->latest()->get();
         return view('admin.sections.form', $data);
     }
 

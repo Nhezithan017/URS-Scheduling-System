@@ -23,7 +23,7 @@
 </div>
 
 @foreach($course->sections as $sec)
-<div class="row mb-4">
+<div class="row mb-4 container-fluid">
 <table>
   <thead>
     <tr>
@@ -49,9 +49,10 @@
     @foreach($sec->allocate_classroom as $all_cm)
     <tr>
       <td>
-        {{ implode(',',$all_cm->days) }}
+        {{ implode('-',$all_cm->days) }}
       </td>
       <td>{{ $all_cm->start_time }} - {{ $all_cm->end_time }}</td>
+      
       {{ $subject = App\Subject::find($all_cm->subject_id) }}
       <td>{{ $subject->code }}</td>
       <td>{{ $subject->description }}</td>
@@ -61,11 +62,24 @@
 
       <td class="td-center">{{ $all_cm->room_no }}</td>
       {{ $section = App\Section::find($all_cm->section_id) }}
-      <td class="td-center">{{ $section->year }}{{ $section->section }}</td>
+      <td class="td-center">{{ $section->year }}-{{ $section->section }}</td>
       {{ $teacher = App\Teacher::find($all_cm->teacher_id) }}
       <td class="td-center">{{ $teacher->name }}</td>
     </tr>
     @endforeach
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      
+      <td align="center">Total</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
   </tbody>
 </table>
 

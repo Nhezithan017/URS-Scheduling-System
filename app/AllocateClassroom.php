@@ -25,7 +25,7 @@ class AllocateClassroom extends Model
     {
     return $this->hasMany('App\Subject','id','subject_id');
     }
-
+  
     public function daysAndTimeOverlaps($start_time, $end_time, $days, $id)
     {
         $d_t_c = DB::table('allocate_classrooms')

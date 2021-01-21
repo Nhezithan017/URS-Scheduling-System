@@ -17,19 +17,26 @@
                 @include('layouts.errors')
                 <form action="{{ $modify === 1 ? route('section.update', ['section_id' => $section_id]) : route('section.create', $course_id ?? '') }}" method="post">
                     @csrf
-                
-              <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                        <label for="" class="form-label">Adviser</label>
-                            <input type="text" class="form-control" name="adviser" placeholder="{{ __('Adviser') }}" value="{{ $sections->adviser ?? old('adviser') }}"  autofocus>
-                        </div>
-            
-                    </div>  
-              </div> 
 
               <div class="row">
-                    <div class="col-6">
+              <div class="col-4">
+                    <div class="form-group">
+                    <label for="" class="form-label">Adviser:</label>       
+                                    <select class="selectinstructor"  data-live-search="true" name="adviser">
+                                                <option disabled selected>--Select Adviser--</option>
+                                        @foreach ($instructors as $value)
+                                                <option value="{{ $value->name }}"
+                                                
+                                                @if ($sections->adviser ?? '' === $value->name)
+                                                        selected="selected"
+                                                @endif
+                                                >{{ $value->name }}</option>
+                                        @endforeach
+
+                                    </select>    
+                        </div>
+                    </div>  
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="" class="form-label">Section:</label>       
                             <select class="selectsection"  data-live-search="true" name="section">
@@ -47,7 +54,7 @@
                         
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="" class="form-label">Year</label>
                                 <select class="selectyear"  data-live-search="true" name="year">
@@ -95,6 +102,7 @@
         $('select').selectpicker();
         $('.selectsection').selectpicker();
         $('.selectyear').selectpicker();
+        $('.selectinstructor').selectpicker();
     });
 
 </script>

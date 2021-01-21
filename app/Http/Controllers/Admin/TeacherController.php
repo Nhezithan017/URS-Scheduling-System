@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Teacher;
+use Barryvdh\DomPDF\PDF;
 use Yajra\DataTables\Facades\DataTables;    
 class TeacherController extends Controller
 {
@@ -15,6 +16,21 @@ class TeacherController extends Controller
         $this->middleware('permission:instructor-edit', ['only' => ['showInstructor','updateInstrutor']]);
         $this->middleware('permission:instructor-delete', ['only' => ['deleteInstructor']]);
         $this->instructors = $instructors;
+    }
+    public function print($id)
+    {
+        $pdf = app('dompdf.wrapper');
+
+
+        
+        $pdf->getDomPDF()->set_option("enable_php", true);
+
+       $instructor =  $this->instructors->find($id);
+
+        $pdf->loadView('admin.instructors.print', compact('instructor'));
+
+            
+       return $pdf->stream('invoice.pdf');
     }
     public function getInstructor(Request $request){
 

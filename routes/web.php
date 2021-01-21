@@ -68,7 +68,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('instructor/{id}', 'Admin\TeacherController@showInstructor')->name('instructor.show');
     Route::post('instructor/{id}', 'Admin\TeacherController@updateInstructor')->name('instructor.update');
     Route::delete('instructor/{id}/delete', 'Admin\TeacherController@deleteInstructor')->name('instructor.delete');
-
+    Route::get('instructor/{id}/print', 'Admin\TeacherController@print')->name('instructor.print');
     //Subjects
     Route::get('subjects', 'Admin\SubjectController@getSubject')->name('subject.index');
     Route::get('subject/create', 'Admin\SubjectController@createSubject')->name('subject.new');

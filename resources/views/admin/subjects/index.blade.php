@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
             <div class="d-flex justify-content-between">
-            @can('subject.create')
+            @can('subject-create')
               <a class="btn btn-success mb-3" href="{{ route('subject.new') }}"><i class="fas fa-fw fa-plus-square"></i></a>        
             @endcan
             </div>

@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class DataContent extends ReadOnlyBase
 {
     public $days = [
-        'MON' => 'Monday',
-        'TUE' => 'Tuesday',
-        'WED' => 'Wednesday',
-        'THUR' => 'Thursday',
-        'FRI' => 'Friday',
-        'SAT' => 'Saturday',
+        'M' => 'Monday',
+        'T' => 'Tuesday',
+        'W' => 'Wednesday',
+        'TH' => 'Thursday',
+        'F' => 'Friday',
+        'S' => 'Saturday',
         'SUN' => 'Sunday'
      ];
 
@@ -57,6 +57,9 @@ class DataContent extends ReadOnlyBase
          'CPE-A',
          'CPE-B',
          'CPE-C',
+         'Irregular Student',
+         'Old Curriculum',
+         'Subject from other program'
 
      ];
 
