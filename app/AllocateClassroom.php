@@ -14,7 +14,14 @@ class AllocateClassroom extends Model
     protected $casts = [
         'days' => 'array'
     ];
-    
+    public function getStartTimeAttribute($date)
+{
+    return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('H:i a');
+}
+public function getEndTimeAttribute($date)
+{
+    return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('H:i a');
+}
     protected $guarded = [];
 
     public function section()
@@ -26,10 +33,10 @@ class AllocateClassroom extends Model
     return $this->hasMany('App\Subject','id','subject_id');
     }
   
-    public function daysAndTimeOverlaps($start_time, $end_time, $days, $id)
+    public function daysAndTimeOverlaps($start_time, $end_time, $days , $id)
     {
-        $d_t_c = DB::table('allocate_classrooms')
-                        ->whereIn('days', [$days])
+        $d_t_c =  DB::table('allocate_classrooms')
+                        ->whereIn('days' ,$days)
                         ->where('start_time','<=', $start_time)
                         ->where('end_time', '>=', $end_time)
                         ->count() == 0;

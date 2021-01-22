@@ -22,8 +22,8 @@ class CreateAllocateClassroomsTable extends Migration
             $table->integer('teacher_id')->unsigned();
             $table->foreign('teacher_id')->references('id')->on('teachers');
             $table->json('days');
-            $table->time('start_time')->format('hh:mm');
-            $table->time('end_time')->format('hh:mm');
+            $table->timestamp('start_time')->useCurrent();
+            $table->timestamp('end_time')->useCurrent();
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')->references('id')->on('subjects')
             ->onDelete('cascade');

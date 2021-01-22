@@ -23,6 +23,7 @@
 </div>
 
 @foreach($course->sections as $sec)
+
 <div class="row mb-4 container-fluid">
 <table>
   <thead>
@@ -50,17 +51,13 @@
     <tr>
       <td>
         {{ implode('-',$all_cm->days) }}
-      </td>
-      <td>{{ $all_cm->start_time }} - {{ $all_cm->end_time }}</td>
-      {{   $endTime = Carbon\Carbon::parse($all_cm->end_time) }}
-       {{ $startTime = Carbon\Carbon::parse($all_cm->start_time) }}
-         {{ $totalDuration =  $startTime->diff($endTime)->format('%H:%I:%S')." Minutes" }}
-   <td> {{ $totalDuration }}</td>
-
+      </td> 
+      <td>{{ Carbon\Carbon::parse($all_cm->start_time)->format('H:i') }} - {{ Carbon\Carbon::parse($all_cm->end_time)->format('H:i') }}</td>
+     
       {{ $subject = App\Subject::find($all_cm->subject_id) }}
       <td>{{ $subject->code }}</td>
       <td>{{ $subject->description }}</td>
-      <td class="td-center">{{ $subject->lec }}</td>
+      <td class="td-center">{{ $subject->lec  }}</td>
       <td class="td-center">{{ $subject->lab }}</td>
       <td class="td-center">{{ $subject->unit }}</td>
 

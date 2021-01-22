@@ -103,7 +103,7 @@
                             <div class="form-group">
                              <label for="" class="form-label">Start Time:</label>              
                                     
-                                <input type="text" value="{{ $allocate_classroom->start_time ?? old('start_time') }}" class="form-control" id="start_time" data-format="hh:mm:ss" data-template="hh:mm:ss" name="start_time">
+                                <input type="text" value="{{ $allocate_classroom->start_time ?? old('start_time') }}" class="form-control" id="start_time" data-format="hh:mm a" data-template="hh:mm a" name="start_time">
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                         <div class="col">
                             <div class="form-group">
                              <label for="" class="form-label">End Time:</label>                           
-                                <input type="text" value="{{ $allocate_classroom->end_time ?? old('end_time') }}" class="form-control" id="end_time" data-format="hh:mm:ss" data-template="hh:mm:ss" name="end_time">
+                                <input type="text" value="{{ $allocate_classroom->end_time ?? old('end_time') }}" class="form-control" id="end_time" data-format="hh:mm a" data-template="hh:mm a" name="end_time">
                             </div>
                         </div>  
                     </div>

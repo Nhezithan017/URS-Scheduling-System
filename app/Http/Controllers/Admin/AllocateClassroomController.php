@@ -55,6 +55,7 @@ class AllocateClassroomController extends Controller
              $end_time = $request->input('end_time');
              $days = $request->input('days');
                     
+            //  $this->allocate_classroom->daysAndTimeOverlaps($start_time, $end_time, $days, $sectionid);
              $section->allocate_classroom()->create($data);
                 
                 return redirect('section/' . $section->id . '/show')

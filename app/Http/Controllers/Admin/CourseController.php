@@ -22,6 +22,7 @@ class CourseController extends Controller
         $this->courses = $courses;
         $this->semester = $data_content->semester;
         $this->department = $data_content->department;
+        $this->rooms = $data_content->rooms;
     }
     public function getCourses(Request $request){
 
@@ -55,6 +56,21 @@ class CourseController extends Controller
        return $pdf->stream('invoice.pdf');
     }
 
+    public function room_utilization($id)
+    {
+        $pdf = app('dompdf.wrapper');
+
+
+        
+        $pdf->getDomPDF()->set_option("enable_php", true);
+
+       $course =  $this->courses->find($id);
+        $rooms =  $this->rooms;
+        $pdf->loadView('admin.courses.room_utilization', compact('course','rooms'));
+
+            
+       return $pdf->stream('invoice.pdf');
+    }
   
     public function showCourses(Request $request, Course $course)
     {
