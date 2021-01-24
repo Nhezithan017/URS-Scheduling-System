@@ -30,7 +30,7 @@
     <tr>
       <th scope="col" colspan="3">SECTION: {{ $sec->description }} {{ $sec->section }}</th>
       <th scope="col" colspan="4">ADVISER: {{ $sec->adviser }}</th>
-      <th scope="col" colspan="3">ROOM ASSIGNMENT</th>
+      <th scope="col" colspan="4">ROOM ASSIGNMENT</th>
     </tr>
     <tr>
 
@@ -44,6 +44,7 @@
       <th scope="col">ROOM</th>
       <th scope="col">YR & SEC</th>
       <th scope="col">INSTRUCTOR</th>
+      <th scope="col">Status</th>
     </tr>
   </thead>
   <tbody>
@@ -66,6 +67,7 @@
       <td class="td-center">{{ $all_cm->year }}-{{ $all_cm->section }}</td>
       {{ $teacher = App\Teacher::find($all_cm->teacher_id) }}
       <td class="td-center">{{ $teacher->name }}</td>
+      <td class="td-center">{{ $teacher->status === 1 ? 'ok' : 'not' }}</td>
     </tr>
 
 
@@ -86,6 +88,8 @@
       <td></td>
       <td></td>
       <td></td>
+      <td></td>
+
     </tr>
   </tbody>
 </table>

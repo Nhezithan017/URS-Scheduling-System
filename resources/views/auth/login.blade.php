@@ -8,6 +8,7 @@
     background-position: center center;
     background-size: cover;
 }
+
 </style>
 <div class="container">
     <div class="row justify-content-center">
@@ -47,11 +48,11 @@
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user" name="password" placeholder="{{ __('Password') }}" required>
                                     </div>
-
+    
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
                                             <input type="checkbox" class="custom-control-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                            <label class="custom-control-label" for="remember">{{ __('Remember Me') }}</label>
+                                        <label class="custom-control-label" for="remember">{{ __('Remember Me') }}</label>
                                         </div>
                                     </div>
 

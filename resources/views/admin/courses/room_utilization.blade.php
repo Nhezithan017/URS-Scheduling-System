@@ -45,7 +45,7 @@
  {{ $subject = App\Subject::find($all_cr->subject_id) }}
  <td>{{ $teacher->name }}</td>
  <td> {{ $subject->code }}</td>
- <td> {{ $sec->year }} - {{ $sec->section }}</td>
+ <td> {{ $all_cr->year }} - {{ $all_cr->section }}</td>
  <td>{{ $all_cr->room_no}}</td>
  @endforeach
   </tbody>
