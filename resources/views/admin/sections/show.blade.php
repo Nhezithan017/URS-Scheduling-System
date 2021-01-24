@@ -10,14 +10,11 @@
             <div class="card-body">
             <div class="container">
   <div class="row gy-5">
-    <div class="col-4">
+    <div class="col-6">
       <div class="p-3 border bg-light">Adviser:  <b>{{ $section->adviser }}</b></div>
     </div>
-    <div class="col-4">
-    <div class="p-3 border bg-light">Year:  <b>{{ $section->year }}</b></div>
-    </div>
-    <div class="col-4">
-      <div class="p-3 border bg-light">Section:  <b>{{ $section->section }}</b></div>
+    <div class="col-6">
+    <div class="p-3 border bg-light">Description:  <b>{{ $section->description }}</b></div>
     </div>
   </div>
 </div>

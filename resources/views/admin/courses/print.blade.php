@@ -53,7 +53,7 @@
       <td>
         {{ implode('-',$all_cm->days) }}
       </td> 
-      <td>{{ Carbon\Carbon::parse($all_cm->start_time)->format('h:i a') }} - {{ Carbon\Carbon::parse($all_cm->end_time)->format('h:i a') }}</td>
+      <td>{{ Carbon\Carbon::parse($all_cm->start_time)->format('h:i') }} - {{ Carbon\Carbon::parse($all_cm->end_time)->format('h:i') }}</td>
      
       {{ $subject = App\Subject::find($all_cm->subject_id) }}
       <td>{{ $subject->code }}</td>
@@ -67,7 +67,7 @@
       <td class="td-center">{{ $all_cm->year }}-{{ $all_cm->section }}</td>
       {{ $teacher = App\Teacher::find($all_cm->teacher_id) }}
       <td class="td-center">{{ $teacher->name }}</td>
-      <td class="td-center">{{ $teacher->status === 1 ? 'ok' : 'not' }}</td>
+      <td class="td-center">{{ $all_cm->status === 1 ? 'ok' : 'not' }}</td>
     </tr>
 
 

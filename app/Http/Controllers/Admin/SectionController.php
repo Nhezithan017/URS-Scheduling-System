@@ -87,7 +87,7 @@ class SectionController extends Controller
                 }
         $data['course_id'] = $course->id;
 
-            
+        
         
         $data['modify'] = 0;
        
@@ -99,14 +99,14 @@ class SectionController extends Controller
     public function showSection(Request $request, $id)
     {
         $data = [];
-        $data['modify'] = 1;
+       
         $data['section_id'] = $id;
-
+        
         $data['sections'] = $this->sections->find($id);
         
         $data['course_id'] = $data['sections']->course_id;
 
-       
+        $data['modify'] = 1;
         $data['instructors'] = $this->instructors->latest()->get();
         return view('admin.sections.form', $data);
     }
