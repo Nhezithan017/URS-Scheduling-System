@@ -20,7 +20,7 @@ class Section extends Model
     
     protected static $logAttributes = ['adviser', 'year', 'section'];
 
-    protected static $logName = 'section';
+    protected static $logName = 'Section';
 
     protected static $logOnlyDirty = true;
 

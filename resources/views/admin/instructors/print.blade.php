@@ -44,7 +44,7 @@
       @foreach($alloc_classroom as $all_cr)
     <tr>
   
-      <td>{{ $all_cr->start_time }} - {{ $all_cr->end_time }}</td>
+      <td>{{ Carbon\Carbon::parse($all_cr->start_time)->format('h:i a') }} - {{ Carbon\Carbon::parse($all_cr->end_time)->format('h:i a') }}</td>
       <td>{{ implode('-', $all_cr->days)}}</td>
       {{ $subject = App\Subject::find($all_cr->subject_id) }}
       <td>{{ $subject->code }}</td>

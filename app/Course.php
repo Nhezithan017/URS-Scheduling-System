@@ -30,7 +30,7 @@ class Course extends Model
     
     protected static $logAttributes = ['description', 'sy_start', 'sy_end', 'semester'];
 
-    protected static $logName = 'course';
+    protected static $logName = 'Course';
 
     protected static $logOnlyDirty = true;
 

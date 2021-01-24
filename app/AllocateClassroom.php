@@ -42,7 +42,7 @@ class AllocateClassroom extends Model
 
     protected static $logAttributes = ['room_no', 'teacher_id', 'days', 'start_time', 'end_time', 'subject_id', 'section_id'];
 
-    protected static $logName = 'allocate_classroom';
+    protected static $logName = 'Allocate of Classroom';
 
     protected static $logOnlyDirty = true;
 
