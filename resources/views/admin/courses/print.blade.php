@@ -52,7 +52,7 @@
       <td>
         {{ implode('-',$all_cm->days) }}
       </td> 
-      <td>{{ Carbon\Carbon::parse($all_cm->start_time)->format('H:i') }} - {{ Carbon\Carbon::parse($all_cm->end_time)->format('H:i') }}</td>
+      <td>{{ Carbon\Carbon::parse($all_cm->start_time)->format('h:i a') }} - {{ Carbon\Carbon::parse($all_cm->end_time)->format('h:i a') }}</td>
      
       {{ $subject = App\Subject::find($all_cm->subject_id) }}
       <td>{{ $subject->code }}</td>
@@ -67,16 +67,20 @@
       {{ $teacher = App\Teacher::find($all_cm->teacher_id) }}
       <td class="td-center">{{ $teacher->name }}</td>
     </tr>
+
+
     @endforeach
     <tr>
       <td></td>
       <td></td>
       <td></td>
-      
+      {{$lec = DB::table('allocate_classrooms')->where('section_id', '=', $all_cm->section_id)->sum('lec') }}
+      {{$lab = DB::table('allocate_classrooms')->where('section_id', '=', $all_cm->section_id)->sum('lab') }}
+      {{$unit = DB::table('allocate_classrooms')->where('section_id', '=', $all_cm->section_id)->sum('unit') }}
       <td align="center">Total</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td align="center"> {{ $lec }}</td>
+      <td align="center">{{ $lab }}</td>
+      <td align="center">{{ $unit }}</td>
       <td></td>
       <td></td>
       <td></td>

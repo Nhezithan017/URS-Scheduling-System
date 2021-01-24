@@ -43,8 +43,7 @@
                             <th>Room No.</th>
                             <th>Instructor</th>
                             <th>Days</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
+                            <th>Time</th>
                             <th>Subject</th>
                             <th>Status</th>
                             <th width="100px">Action</th>
@@ -120,8 +119,7 @@ $('#ok_button').click(function(){
           { data: 'room_no', name: 'room_no' },
           { data: 'instructor', name: 'instructor' },
           { data: 'days', name: 'days' },
-          { data: 'start_time', name: 'start_time' },
-          { data: 'end_time', name: 'end_time' },
+          { data: 'time', name: 'time' },
           { data: 'subject', name: 'subject' },
           { data: 'status', name: 'status' },
           { data: 'action', name: 'action', orderable: false, searchable: false},

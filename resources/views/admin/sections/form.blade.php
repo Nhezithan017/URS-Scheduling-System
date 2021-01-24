@@ -27,7 +27,7 @@
                                         @foreach ($instructors as $value)
                                                 <option value="{{ $value->name }}"
                                                 
-                                                @if ($sections->adviser ?? '' === $value->name)
+                                                @if ($value->name == $sections->adviser ?? '')
                                                         selected="selected"
                                                 @endif
                                                 >{{ $value->name }}</option>
@@ -36,41 +36,13 @@
                                     </select>    
                         </div>
                     </div>  
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for="" class="form-label">Section:</label>       
-                            <select class="selectsection"  data-live-search="true" name="section">
-                                                <option disabled selected>--Select Section--</option>
-                                                @foreach ($section as $value)
-                                                        <option value="{{ $value }}"
-                                                        
-                                                        @if ($sections->section ?? '' == $value)
-                                                                selected="selected"
-                                                        @endif
-                                                        >{{ $value }}</option>
-                                                @endforeach
-
-                                   </select>
-                        
+                    <div class="col-6">
+                    <div class="form-group row">
+                    <label for="" class="form-label col-3">Description:</label>       
+                                 <input type="text" class="form-control col" value="{{ $sections->description ?? old('description') }}" name="description">
                         </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for="" class="form-label">Year</label>
-                                <select class="selectyear"  data-live-search="true" name="year">
-                                <option disabled selected>--Select Year--</option>
-                                             @foreach ($year as $value)
-                                                        <option value="{{ $value }}"
-                                                        
-                                                        @if ($sections->year ?? '' == $value)
-                                                                selected="selected"
-                                                        @endif
-                                                        >{{ $value }}</option>
-                                                @endforeach
-                                </select>
-                            
-                        </div>
-                    </div>
+                    </div>  
+                   
               </div> 
 
                    

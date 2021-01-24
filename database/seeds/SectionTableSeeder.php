@@ -15,14 +15,12 @@ class SectionTableSeeder extends Seeder
         DB::table('sections')->insert([
             [
                 'adviser' => 'Joriz Chiong',
-                'year' => '1',
-                'section' => '1B',
+                'description' => '1B',
                 'course_id' => 1
            ],
            [
                 'adviser' => 'Manuel Dangan',
-                'year' => '1',
-                'section' => '1B',
+                'description' => '1B',
                 'course_id' => 1
             
             ]

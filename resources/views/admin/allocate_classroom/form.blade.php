@@ -63,7 +63,7 @@
                     <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                <label>Select Days </label><br/>
+                                <label>Select Days: </label><br/>
                                     <select class="selectpicker" multiple data-live-search="true" name="days[]">
                                     
                                         @foreach ($days as $key => $value)
@@ -96,14 +96,51 @@
                             </div>
                         </div>
                     </div> 
-                    
+                    <div class=row>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="" class="form-label">Year:</label><br/>
+                                <select class="selectyear"  data-live-search="true" name="year">
+                                <option disabled selected>--Select Year--</option>
+                                             @foreach ($year as $value)
+                                                        <option value="{{ $value }}"
+                                                        
+                                                        @if ($allocate_classroom->year ?? '' == $value)
+                                                                selected="selected"
+                                                        @endif
+                                                        >{{ $value }}</option>
+                                                @endforeach
+                                </select>
+                            
+                        </div>
+                    </div>
+                      
+                        <div class="col-6">
+                        <div class="form-group">
+                            <label for="" class="form-label">Section:</label><br/>       
+                            <select class="selectsection"  data-live-search="true" name="section">
+                                                <option disabled selected>--Select Section--</option>
+                                                @foreach ($section as $value)
+                                                        <option value="{{ $value }}"
+                                                        
+                                                        @if ($allocate_classroom->section ?? '' == $value)
+                                                                selected="selected"
+                                                        @endif
+                                                        >{{ $value }}</option>
+                                                @endforeach
+
+                                   </select>
+                        
+                        </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                              <label for="" class="form-label">Start Time:</label>              
                                     
-                                <input type="text" value="{{ $allocate_classroom->start_time ?? old('start_time') }}" class="form-control" id="start_time" data-format="hh:mm a" data-template="hh:mm a" name="start_time">
+                                <input type="time" value="{{ $allocate_classroom->start_time ?? old('start_time') }}" class="form-control" name="start_time">
                             </div>
                         </div>
                     </div>
@@ -112,7 +149,15 @@
                         <div class="col">
                             <div class="form-group">
                              <label for="" class="form-label">End Time:</label>                           
-                                <input type="text" value="{{ $allocate_classroom->end_time ?? old('end_time') }}" class="form-control" id="end_time" data-format="hh:mm a" data-template="hh:mm a" name="end_time">
+                                <input type="time" value="{{ $allocate_classroom->end_time ?? old('end_time') }}" class="form-control"  name="end_time">
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                             <label for="" class="form-label">Class Size:</label>                           
+                                <input type="text" value="{{ $allocate_classroom->class_size ?? old('end_time') }}" class="form-control"  name="class_size">
                             </div>
                         </div>  
                     </div>

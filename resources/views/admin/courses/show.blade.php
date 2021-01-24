@@ -44,8 +44,7 @@
                         <tr>
                             <th>No</th>
                             <th>Adviser</th>
-                            <th>Year</th>
-                            <th>Section</th>
+                            <th> Year & Section / ISP / Irregular</th>
                             <th width="100px">Action</th>
                         </tr>
                     </thead>
@@ -117,8 +116,7 @@ $('#ok_button').click(function(){
       columns: [
           { data: 'DT_RowIndex', name: 'DT_RowIndex' },
           { data: 'adviser', name: 'adviser' },
-          { data: 'year', name: 'year' },
-          { data: 'section', name: 'section' },
+          { data: 'description', name: 'description' },
           { data: 'action', name: 'action', orderable: false, searchable: false},
       ]
   });

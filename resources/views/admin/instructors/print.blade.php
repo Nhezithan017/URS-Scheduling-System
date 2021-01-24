@@ -40,8 +40,10 @@
       <th>CLASS SIZE</th>
     </tr>
     {{ $alloc_classroom = App\AllocateClassroom::where('teacher_id', $instructor->id )->get() }}
+    
       @foreach($alloc_classroom as $all_cr)
     <tr>
+  
       <td>{{ $all_cr->start_time }} - {{ $all_cr->end_time }}</td>
       <td>{{ implode('-', $all_cr->days)}}</td>
       {{ $subject = App\Subject::find($all_cr->subject_id) }}
@@ -56,13 +58,17 @@
       <td></td>
     </tr>
     @endforeach
+  
     <tr>
       <td></td>
       <td></td>
       <td></td>
+      {{$lec = DB::table('allocate_classrooms')->where('teacher_id', '=', $all_cr->section_id)->sum('lec') }}
+      {{$lab = DB::table('allocate_classrooms')->where('teacher_id', '=', $all_cr->section_id)->sum('lab') }}
+      {{$unit = DB::table('allocate_classrooms')->where('teacher_id', '=', $all_cr->section_id)->sum('unit') }}
       <td>Total</td>
-      <td></td>
-      <td></td>
+      <td>{{ $lec }}</td>
+      <td>{{ $lab }}</td>
       <td></td>
       <td></td>
       <td></td>

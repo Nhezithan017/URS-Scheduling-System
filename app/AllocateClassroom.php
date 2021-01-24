@@ -14,14 +14,7 @@ class AllocateClassroom extends Model
     protected $casts = [
         'days' => 'array'
     ];
-    public function getStartTimeAttribute($date)
-{
-    return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('H:i a');
-}
-public function getEndTimeAttribute($date)
-{
-    return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('H:i a');
-}
+   
     protected $guarded = [];
 
     public function section()

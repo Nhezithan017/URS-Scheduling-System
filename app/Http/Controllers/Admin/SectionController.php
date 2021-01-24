@@ -19,9 +19,8 @@ class SectionController extends Controller
         $this->middleware('permission:section-edit', ['only' => ['showSection','updateSection']]);
         $this->middleware('permission:section-delete', ['only' => ['deleteSection']]);
 
-        $this->year = $data_content->year; 
+ 
         $this->sections = $sections;
-        $this->section = $data_content->section;
         $this->instructors = $instructors;   
     }
     
@@ -35,6 +34,9 @@ class SectionController extends Controller
                             $subject = Subject::find($row->subject_id);
                             return $subject->description . ' (' . $subject->code . ')';
                     })
+                    ->addColumn('time', function($row){
+                        return \Carbon\Carbon::parse($row->start_time)->format('h:i a') . ' - ' . \Carbon\Carbon::parse($row->end_time)->format('h:i a');
+                })
                     ->addColumn('instructor', function($row){
                             
                         $instructor = Teacher::find($row->teacher_id);
@@ -58,6 +60,7 @@ class SectionController extends Controller
                     })
                     ->rawColumns(['instructor'])
                     ->rawColumns(['subject'])
+                    ->rawColumns(['time'])
                     ->rawColumns(['status'])
                     ->rawColumns(['action'])
                     ->make(true);
@@ -73,8 +76,7 @@ class SectionController extends Controller
 
                 $data = $this->validate($request, [
                     'adviser' => 'required',
-                    'year' => 'required',
-                    'section' => 'required'
+                    'description' => 'required',
                 ]);
 
                 $course->sections()->create($data);
@@ -88,8 +90,7 @@ class SectionController extends Controller
             
         
         $data['modify'] = 0;
-        $data['year'] = $this->year;
-        $data['section'] = $this->section;
+       
         $data['instructors'] = $this->instructors->latest()->get();
         return view('admin.sections.form', $data);
     }
@@ -105,9 +106,7 @@ class SectionController extends Controller
         
         $data['course_id'] = $data['sections']->course_id;
 
-        $data['year'] = $this->year;
-         
-        $data['section'] = $this->section;
+       
         $data['instructors'] = $this->instructors->latest()->get();
         return view('admin.sections.form', $data);
     }
@@ -121,8 +120,7 @@ class SectionController extends Controller
 
             $data = $this->validate($request, [
                 'adviser' => 'required',
-                'year' => 'required',
-                'section' => 'required'
+                'description' => 'required'
             ]);
 
 

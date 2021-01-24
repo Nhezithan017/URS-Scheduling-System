@@ -39,7 +39,7 @@
   {{ $totalDuration =  $startTime->diff($endTime)->format('%H:%I') }}
  <tr>
  <td>{{ $totalDuration }}</td>
- <td>{{ Carbon\Carbon::parse($all_cr->start_time)->format('H:i') }} - {{ Carbon\Carbon::parse($all_cr->end_time)->format('H:i') }}</td>
+ <td>{{ Carbon\Carbon::parse($all_cr->start_time)->format('h:i a') }} - {{ Carbon\Carbon::parse($all_cr->end_time)->format('h:i a') }}</td>
  <td>{{ implode('-', $all_cr->days) }}</td>
  {{ $teacher = App\Teacher::find($all_cr->teacher_id)}}
  {{ $subject = App\Subject::find($all_cr->subject_id) }}

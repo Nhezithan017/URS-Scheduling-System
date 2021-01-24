@@ -22,8 +22,8 @@ class CreateAllocateClassroomsTable extends Migration
             $table->integer('teacher_id')->unsigned();
             $table->foreign('teacher_id')->references('id')->on('teachers');
             $table->json('days');
-            $table->timestamp('start_time')->useCurrent();
-            $table->timestamp('end_time')->useCurrent();
+            $table->time('start_time');
+            $table->time('end_time');
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')->references('id')->on('subjects')
             ->onDelete('cascade');
@@ -31,6 +31,12 @@ class CreateAllocateClassroomsTable extends Migration
             $table->foreign('section_id')->references('id')->on('sections')
             ->onDelete('cascade');
             $table->boolean('status')->default(false);
+            $table->integer('class_size')->nullable();
+            $table->string('year');
+            $table->string('section');
+            $table->integer('lec')->nullable();
+            $table->integer('lab')->nullable();
+            $table->integer('unit')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
