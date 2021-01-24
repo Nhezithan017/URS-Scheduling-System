@@ -54,22 +54,22 @@
       <td>{{ $subject->lec + $subject->lab }}</td>
       <td>{{ $all_cr->room_no }}</td>
       {{ $section = App\Section::find($all_cr->section_id) }}
-      <td>{{ $section->year }}-{{ $section->section }}</td>
+      <td>{{ $section->description }}</td>
       <td></td>
     </tr>
     @endforeach
   
     <tr>
       <td></td>
+      <td></td> 
       <td></td>
-      <td></td>
-      {{$lec = DB::table('allocate_classrooms')->where('teacher_id', '=', $all_cr->section_id)->sum('lec') }}
-      {{$lab = DB::table('allocate_classrooms')->where('teacher_id', '=', $all_cr->section_id)->sum('lab') }}
-      {{$unit = DB::table('allocate_classrooms')->where('teacher_id', '=', $all_cr->section_id)->sum('unit') }}
+      {{$lec = DB::table('allocate_classrooms')->where('teacher_id', '=', $instructor->id)->sum('lec') }}
+      {{$lab = DB::table('allocate_classrooms')->where('teacher_id', '=',  $instructor->id)->sum('lab') }}
+      {{$unit = DB::table('allocate_classrooms')->where('teacher_id', '=',  $instructor->id)->sum('unit') }}
       <td>Total</td>
       <td>{{ $lec }}</td>
       <td>{{ $lab }}</td>
-      <td></td>
+      <td>{{ $lec + $lab }}</td>
       <td></td>
       <td></td>
       <td></td>

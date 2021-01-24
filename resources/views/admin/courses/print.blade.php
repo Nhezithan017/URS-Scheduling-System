@@ -28,7 +28,7 @@
 <table>
   <thead>
     <tr>
-      <th scope="col" colspan="3">SECTION: {{ $sec->year }} {{ $sec->section }}</th>
+      <th scope="col" colspan="3">SECTION: {{ $sec->description }} {{ $sec->section }}</th>
       <th scope="col" colspan="4">ADVISER: {{ $sec->adviser }}</th>
       <th scope="col" colspan="3">ROOM ASSIGNMENT</th>
     </tr>
@@ -63,7 +63,7 @@
 
       <td class="td-center">{{ $all_cm->room_no }}</td>
       {{ $section = App\Section::find($all_cm->section_id) }}
-      <td class="td-center">{{ $section->year }}-{{ $section->section }}</td>
+      <td class="td-center">{{ $all_cm->year }}-{{ $all_cm->section }}</td>
       {{ $teacher = App\Teacher::find($all_cm->teacher_id) }}
       <td class="td-center">{{ $teacher->name }}</td>
     </tr>
@@ -74,9 +74,11 @@
       <td></td>
       <td></td>
       <td></td>
+ 
       {{$lec = DB::table('allocate_classrooms')->where('section_id', '=', $all_cm->section_id)->sum('lec') }}
       {{$lab = DB::table('allocate_classrooms')->where('section_id', '=', $all_cm->section_id)->sum('lab') }}
       {{$unit = DB::table('allocate_classrooms')->where('section_id', '=', $all_cm->section_id)->sum('unit') }}
+  
       <td align="center">Total</td>
       <td align="center"> {{ $lec }}</td>
       <td align="center">{{ $lab }}</td>

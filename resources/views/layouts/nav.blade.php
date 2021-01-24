@@ -9,15 +9,15 @@
 <!-- Barangay Profile -->
 <li class="nav-item">
 
-<a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#departmentProfile" aria-expanded="true" aria-controls="collapseUtilities">
-<i class="fas fa-fw fa-user"></i>
-  <span>Department Profile</span>
+<a class="nav-link collapsed" href="{{ route('dashboard') }}" data-toggle="collapse" data-target="#departmentProfile" aria-expanded="true" aria-controls="collapseUtilities">
+<i class="fas fa-hamburger"></i>
+  <span>Dashboard</span>
 </a>
-
+    
 <div id="departmentProfile" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
   <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">Custom Utilities:</h6>
-    <a class="collapse-item" href="">Settings</a>
+    <a class="collapse-item" href="">Dashboard</a>
   </div>
 </div>
 </li>
