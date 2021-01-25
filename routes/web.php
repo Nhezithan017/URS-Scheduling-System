@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth'], function(){
     //Users
     Route::get('users', 'Admin\UserController@getUsers')->name('users.index');
     Route::get('user/create', 'Admin\UserController@createUser')->name('user.new');
-    Route::post('user/create', 'Admin\UserController@createUser')->name('user.create');
+    Route::post('user/create', 'Admin\UserController@insertUser')->name('user.create');
     Route::get('user/{id}', 'Admin\UserController@showUser')->name('user.show');
     Route::post('user/{id}', 'Admin\UserController@updateUser')->name('user.update');
     Route::delete('user/{id}/delete', 'Admin\UserController@deleteUser')->name('user.delete');

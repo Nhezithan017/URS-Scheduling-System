@@ -106,8 +106,8 @@ class SectionController extends Controller
         
         $data['course_id'] = $data['sections']->course_id;
 
-        $data['modify'] = 1;
         $data['instructors'] = $this->instructors->latest()->get();
+        $data['modify'] = 1;
         return view('admin.sections.form', $data);
     }
 

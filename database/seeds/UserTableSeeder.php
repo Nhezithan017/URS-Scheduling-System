@@ -21,6 +21,7 @@ class UserTableSeeder extends Seeder
             'name' => 'Jonathan Bartolome',
         	'username' => 'Admin',
             'password' => Hash::make('p@ssword'),
+            'profile_image' => '1.jpg'
         ]);
 
        

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Traits\UploadTrait;
 use App\User;
 use DataTables;
 use Illuminate\Support\Arr;
@@ -11,9 +12,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
+    use UploadTrait;
+
     public function __construct(User $users)
     {
         $this->middleware('permission:user-list', ['only' => ['getUsers','deleteUser','showUser']]);
@@ -50,31 +54,54 @@ class UserController extends Controller
         $data = [];
 
         
+        
+
+    
+        $data['roles'] = Role::pluck('name', 'name')->all();
+        return view('admin.users.create', $data);
+    }
+    public function insertUser(Request $request)
+    {
         if($request->isMethod('post')){
 
             $data = $this->validate($request, [
                 'name' => 'required|max:255',
                 'username' => 'required|unique:users',
                 'password' => 'required|max:20',
-                'roles' => 'required'
+                'roles' => 'required',
+                'profile_image'  =>  'mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
-          $user_role = $user->create([
-            'name' => $request->input('name'),
-            'username' => $request->input('username'),
-            'password' => Hash::make($request->input('password'))
-          ]);
+            $user = new User;
 
-          $user_role->assignRole($request->input('roles'));
+            $user->name = $request->input('name');
+            $user->username =  $request->input('username');
+            $user->password = Hash::make($request->input('password'));
+     
+            if ($request->has('profile_image')) {
+                // Get image file
+                $image = $request->file('profile_image');
+            
+                // Make a image name based on user name and current timestamp
+                $name = Str::slug($request->input('name')).'_'.time();
+                // Define folder path
+                $folder = '/uploads/user_images/';
+                // Make a file path where image will be stored [ folder path + file name + file extension]
+                $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
+                // Upload image
+                $this->uploadOne($image, $folder, 'public', $name);
+                // Set user profile image path in database to filePath
+                $user->profile_image = $filePath;
+            }
+          
+    
+            $user->save();
+
+          $user->assignRole($request->input('roles'));
             return redirect('users')
         ->with('success','User create successfully');
-        }
-
-        $data['modify'] = 0;
-        $data['roles'] = Role::pluck('name', 'name')->all();
-        return view('admin.users.form', $data);
+          }
     }
-
     public function showUser($id, Request $request)
     {
         $data = [];
@@ -86,7 +113,7 @@ class UserController extends Controller
         $data['roles'] = Role::pluck('name', 'name')->all();
         $data['user_role'] = $data['user']->roles->pluck('name','name')->all();
 
-        return view('admin.users.form', $data);
+        return view('admin.users.edit', $data);
     }
     public function updateUser(Request $request, $id, User $user)
     {
@@ -98,17 +125,44 @@ class UserController extends Controller
            $data =  $this->validate($request, [
                 'name' => 'required|max:255',
                 'username' => 'required',
-                'password' => '|required|max:20|',
-                'roles' => 'required'
+                'password' => 'sometimes|max:20|',
+                'roles' => 'required',
+                'image'  =>  'image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
          
+        $input = $request->all();
             
-            $this->users->find($id)->update([
-                'name' => $request->input('name'),
-                'username' => $request->input('username'),
-                'password' => Hash::make($request->input('password'))
-                ]);
+        $user =  $this->users->find($id);
+
+         
+
+          if(!empty($input['password'])){
+            $input['password'] = Hash::make($input['password']);
+        }else{
+            $input = Arr::except($input, array('password'));
+        }
+
+        $user->name = $input['name'];
+        $user->username =  $input['username'];
+
+        if ($request->has('profile_image')) {
+            // Get image file
+            $image = $request->file('profile_image');
+        
+            // Make a image name based on user name and current timestamp
+            $name = Str::slug($request->input('name')).'_'.time();
+            // Define folder path
+            $folder = '/uploads/user_images/';
+            // Make a file path where image will be stored [ folder path + file name + file extension]
+            $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
+            // Upload image
+            $this->uploadOne($image, $folder, 'public', $name);
+            // Set user profile image path in database to filePath
+            $user->profile_image = $filePath;
+        }
+
+        $user->save();
 
             DB::table('model_has_roles')->where('model_id',$id)->delete();
 

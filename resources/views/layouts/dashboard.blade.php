@@ -39,7 +39,7 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
             <div class="sidebar-brand-icon">
-            <img src="{{ asset('/uploads/images/urs-logo.png') }}"style="width: 40px; height: 40px; border-radius: 50%;" src=""/>
+            <img src="{{ asset('/uploads/images/urs-logo.jpg') }}"style="width: 40px; height: 40px; border-radius: 50%;" src=""/>
             </div>
             <div class="sidebar-brand-text mx-3">URS Sched Sys</div>
         </a>
@@ -97,7 +97,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
 
-                            <img class="img-profile rounded-circle" src="">
+                            <img class="img-profile rounded-circle" src="{{ auth()->user()->profile_image }}">
                          
                         </a>
                         <!-- Dropdown - User Information -->
