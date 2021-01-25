@@ -26,16 +26,19 @@ class AllocateClassroom extends Model
     return $this->hasMany('App\Subject','id','subject_id');
     }
   
-    public function daysAndTimeOverlaps($start_time, $end_time, $days , $id)
+    public function daysAndTimeOverlaps($start_time, $end_time, $days , $section_id)
     {
-        $d_t_c =  DB::table('allocate_classrooms')
-                        ->whereIn('days' ,$days)
-                        ->where('start_time','<=', $start_time)
+        $query =  DB::table('allocate_classrooms');
+
+        $day = $query->all('days');
+
+            
+        $time = $query->where('start_time', '<=' , $start_time)
                         ->where('end_time', '>=', $end_time)
-                        ->count() == 0;
-        
-        if($d_t_c){
-            return redirect('section/' . $id . '/show')
+                        ->count();
+
+        if((count(array_diff($day, $days)) > 0) && $time === 0){
+            return redirect('section/' . $section_id . '/show')
                 ->with('success','time and days overlap');
         }
     }

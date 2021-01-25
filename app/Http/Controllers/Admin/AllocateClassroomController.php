@@ -61,7 +61,7 @@ class AllocateClassroomController extends Controller
              $end_time = $request->input('end_time');
              $days = $request->input('days');
                     
-            //  $this->allocate_classroom->daysAndTimeOverlaps($start_time, $end_time, $days, $sectionid);
+             $this->allocate_classroom->daysAndTimeOverlaps($start_time, $end_time, $days, $sectionid);
             
             $sub = $this->subjects->find($request->input('subject_id'));
 

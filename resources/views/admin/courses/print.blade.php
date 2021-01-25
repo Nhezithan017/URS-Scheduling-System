@@ -43,8 +43,7 @@
       <th scope="col">UNIT</th>
       <th scope="col">ROOM</th>
       <th scope="col">YR & SEC</th>
-      <th scope="col">INSTRUCTOR</th>
-      <th scope="col">Status</th>
+      <th scope="col" colspan="2">INSTRUCTOR</th>
     </tr>
   </thead>
   <tbody>

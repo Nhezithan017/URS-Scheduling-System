@@ -27,7 +27,7 @@
                                         @foreach ($rooms as $value)
                                                 <option value="{{ $value }}"
                                                 
-                                                @if ($value == $allocate_classroom->room_no ?? '')
+                                                @if ($value == ($allocate_classroom->room_no ?? ''))
                                                         selected="selected"
                                                 @endif
                                                 >{{ $value }}</option>
@@ -46,7 +46,7 @@
                                         @foreach ($instructors as $value)
                                                 <option value="{{ $value->id }}"
                                                 
-                                                @if ($value->id == $allocate_classroom->teacher_id ?? '')
+                                                @if ($value->id == ($allocate_classroom->teacher_id ?? ''))
                                                         selected="selected"
                                                 @endif
                                                 >{{ $value->name }}</option>
@@ -86,7 +86,7 @@
                                                     <option disabled selected>--Select  Subject--</option>
                                                     @foreach($subjects as $sub)
                                                     <option value="{{ $sub->id }}"
-                                                            @if ($sub->id == $allocate_classroom->subject_id ?? '')
+                                                            @if ($sub->id == ($allocate_classroom->subject_id ?? ''))
                                                                     selected="selected"
                                                             @endif
                                                             >{{ $sub->description }}</option>
@@ -105,7 +105,7 @@
                                              @foreach ($year as $value)
                                                         <option value="{{ $value }}"
                                                         
-                                                        @if ($value == $allocate_classroom->year ?? '')
+                                                        @if ($value == ($allocate_classroom->year ?? ''))
                                                                 selected="selected"
                                                         @endif
                                                         >{{ $value }}</option>
@@ -123,7 +123,7 @@
                                                 @foreach ($section as $value)
                                                         <option value="{{ $value }}"
                                                         
-                                                        @if ($value == $allocate_classroom->section ?? '')
+                                                        @if ($value == ($allocate_classroom->section ?? ''))
                                                                 selected="selected"
                                                         @endif
                                                         >{{ $value }}</option>
