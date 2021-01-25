@@ -23,9 +23,9 @@
 </div>
 
 @foreach($course->sections as $sec)
-
+@if($sec->allocate_classroom()->count() > 0)
 <div class="row mb-4 container-fluid">
-<table>
+<table width="1000px">
   <thead>
     <tr>
       <th scope="col" colspan="3">SECTION: {{ $sec->description }} {{ $sec->section }}</th>
@@ -48,12 +48,13 @@
     </tr>
   </thead>
   <tbody>
+  
     @foreach($sec->allocate_classroom as $all_cm)
-    <tr>
+    <tr align="center">
       <td>
         {{ implode('-',$all_cm->days) }}
       </td> 
-      <td>{{ Carbon\Carbon::parse($all_cm->start_time)->format('h:i') }} - {{ Carbon\Carbon::parse($all_cm->end_time)->format('h:i') }}</td>
+      <td width="80px">{{ Carbon\Carbon::parse($all_cm->start_time)->format('h:i') }} - {{ Carbon\Carbon::parse($all_cm->end_time)->format('h:i') }}</td>
      
       {{ $subject = App\Subject::find($all_cm->subject_id) }}
       <td>{{ $subject->code }}</td>
@@ -72,7 +73,7 @@
 
 
     @endforeach
-    <tr>
+    <tr align="center">
       <td></td>
       <td></td>
       <td></td>
@@ -96,7 +97,7 @@
 
 
 </div>
-
+@endif
 @endforeach
 
 <script type="text/php">

@@ -15,7 +15,7 @@
               <div class="table-responsive">
               <div class="container">
                 @include('layouts.errors')
-                <form action="{{ $modify === 1 ? route('section.update', ['section_id' => $section_id]) : route('section.create', $course_id ?? '') }}" method="post">
+                <form action="{{ $modify == 1 ? route('section.update', ['section_id' => $section_id]) : route('section.create', $course_id ?? '') }}" method="post">
                     @csrf
 
               <div class="row">
@@ -27,7 +27,7 @@
                                         @foreach ($instructors as $value)
                                                 <option value="{{ $value->name }}"
                                                 
-                                                @if ($value->name == $sections->adviser ?? '')
+                                                @if ($value->name == ($sections->adviser ?? ''))
                                                         selected="selected"
                                                 @endif
                                                 >{{ $value->name }}</option>

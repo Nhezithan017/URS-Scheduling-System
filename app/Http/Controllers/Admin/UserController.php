@@ -125,7 +125,7 @@ class UserController extends Controller
            $data =  $this->validate($request, [
                 'name' => 'required|max:255',
                 'username' => 'required',
-                'password' => 'sometimes|max:20|',
+                'password' => 'nullable|max:20|',
                 'roles' => 'required',
                 'image'  =>  'image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
@@ -135,13 +135,12 @@ class UserController extends Controller
             
         $user =  $this->users->find($id);
 
-         
-
-          if(!empty($input['password'])){
-            $input['password'] = Hash::make($input['password']);
-        }else{
-            $input = Arr::except($input, array('password'));
+        if(!is_null($input['password'])) {
+            $user->password = Hash::make($input['password']);
         }
+    
+
+         
 
         $user->name = $input['name'];
         $user->username =  $input['username'];
@@ -157,6 +156,7 @@ class UserController extends Controller
             // Make a file path where image will be stored [ folder path + file name + file extension]
             $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
             // Upload image
+            $this->deleteOne($user->profile_image);
             $this->uploadOne($image, $folder, 'public', $name);
             // Set user profile image path in database to filePath
             $user->profile_image = $filePath;

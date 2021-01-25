@@ -50,7 +50,7 @@ class CourseController extends Controller
 
        $course =  $this->courses->find($id);
 
-        $pdf->loadView('admin.courses.print', compact('course'));
+        $pdf->loadView('admin.courses.print', compact('course'))->setPaper('a4', 'landscape');
 
             
        return $pdf->stream('invoice.pdf');
@@ -66,7 +66,7 @@ class CourseController extends Controller
 
        $course =  $this->courses->find($id);
         $rooms =  $this->rooms;
-        $pdf->loadView('admin.courses.room_utilization', compact('course','rooms'));
+        $pdf->loadView('admin.courses.room_utilization', compact('course','rooms'))->setPaper('a4', 'landscape');
 
             
        return $pdf->stream('invoice.pdf');

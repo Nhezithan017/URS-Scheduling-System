@@ -23,7 +23,7 @@
                             <option disabled selected>--Select Course--</option>
                             @foreach($department as $key => $value)
                             <option value="{{ $value }}"
-                                    @if ($course->description ?? '' == $value)
+                                    @if (($course->description ?? '') == $value)
                                             selected="selected"
                                     @endif
                                     >{{ $value }}</option>
@@ -61,7 +61,7 @@
                                             <option disabled selected>--Select Semester--</option>
                                                  @foreach($semester as $sem)
                                                     <option value="{{ $sem }}"
-                                                            @if ($course->semester ?? '' == $sem)
+                                                            @if ($sem == ($course->semester ?? ''))
                                                                     selected="selected"
                                                             @endif
                                                             >{{ $sem }}</option>

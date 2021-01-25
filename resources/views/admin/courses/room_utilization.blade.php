@@ -1,6 +1,10 @@
 <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" media="all" />
 <link rel="stylesheet" href="{{ asset('css/print.css') }}" media="all" />
-
+<style>
+.page-break {
+    page-break-after: always;
+}
+</style>
 <div class="row">
   <div class="col text-center mb-2">
     <h1 class="">COLLEGE OF ENGINEERING</h1>
@@ -16,8 +20,8 @@
 
 
 
-<div class="row mb-4 container mx-4">
-<table>
+<div class="row mb-4 container">
+<table  width="1000px">
   <thead>
     <tr>
       <th scope="col">Time Interval</th>
@@ -37,9 +41,9 @@
   {{ $endTime = Carbon\Carbon::parse($all_cr->end_time) }}
   {{ $startTime = Carbon\Carbon::parse($all_cr->start_time) }}
   {{ $totalDuration =  $startTime->diff($endTime)->format('%H:%I') }}
- <tr>
+ <tr align="center">
  <td>{{ $totalDuration }}</td>
- <td>{{ Carbon\Carbon::parse($all_cr->start_time)->format('h:i a') }} - {{ Carbon\Carbon::parse($all_cr->end_time)->format('h:i a') }}</td>
+ <td>{{ Carbon\Carbon::parse($all_cr->start_time)->format('h:i') }} - {{ Carbon\Carbon::parse($all_cr->end_time)->format('h:i') }}</td>
  <td>{{ implode('-', $all_cr->days) }}</td>
  {{ $teacher = App\Teacher::find($all_cr->teacher_id)}}
  {{ $subject = App\Subject::find($all_cr->subject_id) }}
