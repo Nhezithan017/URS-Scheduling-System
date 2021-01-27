@@ -27,6 +27,7 @@ class AllocateClassroomController extends Controller
         $this->subjects = $subjects;
         $this->days = $data_content->days;
         $this->rooms = $data_content->rooms;
+        $this->class_size = $data_content->class_size;
         $this->instructors = $instructors;
 
         $this->year = $data_content->year; 
@@ -43,8 +44,8 @@ class AllocateClassroomController extends Controller
                 $data = $this->validate($request, [
                     'room_no' => 'required',
                     'days' => ['required'],
-                    'start_time' => ['required'],
-                    'end_time' => ['required'],
+                    'start_time' => ['required', new TimeOverlap()],
+                    'end_time' => ['required', new TimeOverlap()],
                     'subject_id' => 'required|integer',
                     'teacher_id'=> 'required|integer',
                     'year' => 'required',
@@ -61,8 +62,9 @@ class AllocateClassroomController extends Controller
              $end_time = $request->input('end_time');
              $days = $request->input('days');
                     
-             $this->allocate_classroom->daysAndTimeOverlaps($start_time, $end_time, $days, $sectionid);
-            
+        //    $res = $this->allocate_classroom->daysAndTimeOverlaps($start_time, $end_time, $sectionid);
+
+           
             $sub = $this->subjects->find($request->input('subject_id'));
 
              $section->allocate_classroom()->create($data + [
@@ -84,7 +86,7 @@ class AllocateClassroomController extends Controller
         $data['section_id'] = $section->id;
         $data['year'] = $this->year;
         $data['section'] = $this->section;
-        
+        $data['class_size'] = $this->class_size;
         return view('admin.allocate_classroom.form', $data);
     }
  
@@ -103,7 +105,7 @@ class AllocateClassroomController extends Controller
         $data['section_id'] = $data['allocate_classroom']->section_id;
         $data['year'] = $this->year;
         $data['section'] = $this->section;
-
+        $data['class_size'] = $this->class_size;
         return view('admin.allocate_classroom.form', $data);
     }
 

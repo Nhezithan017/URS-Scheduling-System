@@ -16,7 +16,8 @@ class TimeOverlap implements Rule
     {
         //
     }
-
+  
+    
     /**
      * Determine if the validation rule passes.
      *
@@ -27,7 +28,8 @@ class TimeOverlap implements Rule
     public function passes($attribute, $value)
     {
         
-        $time_laps = AllocateClassroom::where('start_time', '<=', $value)
+        return AllocateClassroom::
+       where('start_time', '<=', $value)
                                 ->where('end_time','>=', $value)                                
                                 ->count() == 0;
 

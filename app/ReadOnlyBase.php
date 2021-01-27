@@ -15,6 +15,7 @@ class ReadOnlyBase
     protected $lec = [];
     protected $lab = [];
     protected $unit = [];
+    public $class_size = [];
     
     public function days(){
         return $this->days;
@@ -43,5 +44,9 @@ class ReadOnlyBase
     }
     public function unit(){
         return $this->unit;
+    }
+    public function class_size(){
+        
+       $this->class_size;
     }
 }

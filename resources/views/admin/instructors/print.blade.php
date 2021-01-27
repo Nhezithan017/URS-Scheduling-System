@@ -42,9 +42,9 @@
     {{ $alloc_classroom = App\AllocateClassroom::where('teacher_id', $instructor->id )->get() }}
     
       @foreach($alloc_classroom as $all_cr)
-    <tr>
+    <tr align="center">
   
-      <td>{{ Carbon\Carbon::parse($all_cr->start_time)->format('h:i a') }} - {{ Carbon\Carbon::parse($all_cr->end_time)->format('h:i a') }}</td>
+      <td>{{ Carbon\Carbon::parse($all_cr->start_time)->format('h:i') }} - {{ Carbon\Carbon::parse($all_cr->end_time)->format('h:i') }}</td>
       <td>{{ implode('-', $all_cr->days)}}</td>
       {{ $subject = App\Subject::find($all_cr->subject_id) }}
       <td>{{ $subject->code }}</td>
@@ -55,11 +55,11 @@
       <td>{{ $all_cr->room_no }}</td>
       {{ $section = App\Section::find($all_cr->section_id) }}
       <td>{{ $section->description }}</td>
-      <td></td>
+      <td>{{ $all_cr->class_size }}</td>
     </tr>
     @endforeach
   
-    <tr>
+    <tr align="center">
       <td></td>
       <td></td> 
       <td></td>

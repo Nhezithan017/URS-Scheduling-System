@@ -157,7 +157,16 @@
                         <div class="col">
                             <div class="form-group">
                              <label for="" class="form-label">Class Size:</label>                           
-                                <input type="text" value="{{ $allocate_classroom->class_size ?? old('end_time') }}" class="form-control"  name="class_size">
+                                <select name="class_size"  class="form-control">
+                                @foreach ($class_size as $value)
+                                                        <option value="{{ $value }}"
+                                                        
+                                                        @if ($value == ($allocate_classroom->class_size ?? ''))
+                                                                selected="selected"
+                                                        @endif
+                                                        >{{ $value }}</option>
+                                                @endforeach
+                                </select>
                             </div>
                         </div>  
                     </div>
