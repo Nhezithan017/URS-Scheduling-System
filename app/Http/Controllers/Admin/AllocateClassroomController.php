@@ -44,8 +44,8 @@ class AllocateClassroomController extends Controller
                 $data = $this->validate($request, [
                     'room_no' => 'required',
                     'days' => ['required'],
-                    'start_time' => ['required', new TimeOverlap()],
-                    'end_time' => ['required', new TimeOverlap()],
+                    'start_time' => ['required'],
+                    'end_time' => ['required'],
                     'subject_id' => 'required|integer',
                     'teacher_id'=> 'required|integer',
                     'year' => 'required',
@@ -62,21 +62,29 @@ class AllocateClassroomController extends Controller
              $end_time = $request->input('end_time');
              $days = $request->input('days');
                     
-        //    $res = $this->allocate_classroom->daysAndTimeOverlaps($start_time, $end_time, $sectionid);
+        //    $res = $this->allocate_classroom->daysAndTimeOverlaps($start_time, $end_time, $days);
 
-           
+            $alloc = $this->allocate_classroom->where('start_time','<=', $start_time)
+                            ->where('end_time', '>=', $end_time)
+                            ->whereJsonContains('days', $days)->count() > 0;
+
+           if($alloc){
+                return redirect('section/' . $section->id . '/show')
+                ->with('success','Day and Time overlaps');
+           }else{
             $sub = $this->subjects->find($request->input('subject_id'));
 
-             $section->allocate_classroom()->create($data + [
-                 'lec' => $sub->lec,
-                 'lab'=> $sub->lab,
-                 'unit' => $sub->unit
-                 ]);
-                
-                return redirect('section/' . $section->id . '/show')
-            ->with('success','allocate of room create successfully');
-            
-                }
+            $section->allocate_classroom()->create($data + [
+                'lec' => $sub->lec,
+                'lab'=> $sub->lab,
+                'unit' => $sub->unit
+                ]);
+               
+               return redirect('section/' . $section->id . '/show')
+           ->with('success','allocate of room create successfully');
+           }
+          
+        }
                 
         $data['subjects'] = $this->subjects->latest()->get();
         $data['instructors'] = $this->instructors->latest()->get();

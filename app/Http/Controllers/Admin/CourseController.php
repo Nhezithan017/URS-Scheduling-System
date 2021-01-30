@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\AllocateClassroom;
 use App\DataContent;
 use App\Course;
 use DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 class CourseController extends Controller
@@ -45,12 +47,15 @@ class CourseController extends Controller
         $pdf = app('dompdf.wrapper');
 
 
-        
+        $alloc = AllocateClassroom::all();
+        $alloc_unique = $alloc->unique('days','start_time','end_time');
+        $alloc_duplicate = $alloc->diff($alloc_unique);
+
         $pdf->getDomPDF()->set_option("enable_php", true);
 
        $course =  $this->courses->find($id);
 
-        $pdf->loadView('admin.courses.print', compact('course'))->setPaper('a4', 'landscape');
+        $pdf->loadView('admin.courses.print', compact('course','alloc_duplicate'))->setPaper('a4', 'landscape');
 
             
        return $pdf->stream('invoice.pdf');

@@ -29,6 +29,12 @@ class UserController extends Controller
     }
     public function getUsers(Request $request){
 
+        $duplicates = DB::table('allocate_classrooms')
+        ->select('days','start_time','end_time', DB::raw('COUNT(*) as `count`'))
+        ->groupBy('days', 'start_time','end_time')
+        ->havingRaw('COUNT(*) > 1')
+        ->get();
+
         if ($request->ajax()) {
             $data = $this->users->latest()->get();
             return Datatables::of($data)
