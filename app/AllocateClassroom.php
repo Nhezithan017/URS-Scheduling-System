@@ -12,14 +12,20 @@ class AllocateClassroom extends Model
     use LogsActivity;
     
     protected $casts = [
-        'days' => 'array'
+        'days' => 'array',
+        'section' => 'array'
     ];
+    
    
     protected $guarded = [];
 
     public function section()
     {
         return $this->belongsTo('App\Section','section_id', 'id');
+    }
+    public function course()
+    {
+        return $this->belongsTo('App\Section','course_id', 'id');
     }
     public function subject()
     {

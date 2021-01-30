@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\AllocateClassroom;
+use App\Course;
 use App\DataContent;
 use App\Section;
 use Illuminate\Http\Request;
@@ -37,7 +38,8 @@ class AllocateClassroomController extends Controller
     {
         $data = [];
 
-        $sectionid = $section->id;
+       
+        $course_id = $section->course_id;
 
             if($request->isMethod('post')){
 
@@ -61,23 +63,30 @@ class AllocateClassroomController extends Controller
              $start_time = $request->input('start_time');
              $end_time = $request->input('end_time');
              $days = $request->input('days');
-                    
-        //    $res = $this->allocate_classroom->daysAndTimeOverlaps($start_time, $end_time, $days);
+             $section_field = $request->input('section');
+            
 
-            $alloc = $this->allocate_classroom->where('start_time','<=', $start_time)
-                            ->where('end_time', '>=', $end_time)
+            $alloc = $this->allocate_classroom
+                            ->where(function($query) use($start_time, $end_time){
+                                return $query->where('start_time', '<=', $start_time)
+                                            ->where('end_time', '>=', $end_time)->count() == 0;
+                            })
                             ->whereJsonContains('days', $days)->count() > 0;
+
+            
 
            if($alloc){
                 return redirect('section/' . $section->id . '/show')
-                ->with('success','Day and Time overlaps');
+                ->with('error','sorry , day and time overlaps, choose other schedule');
            }else{
             $sub = $this->subjects->find($request->input('subject_id'));
+           
 
             $section->allocate_classroom()->create($data + [
-                'lec' => $sub->lec,
-                'lab'=> $sub->lab,
-                'unit' => $sub->unit
+                'lec' => $sub->lec * count($section_field),
+                'lab'=> $sub->lab * count($section_field),
+                'unit' => $sub->unit * count($section_field),
+                'course_id' => $course_id
                 ]);
                
                return redirect('section/' . $section->id . '/show')
@@ -142,6 +151,7 @@ class AllocateClassroomController extends Controller
             ]);
 
 
+            
             $sub = $this->subjects->find($request->input('subject_id'));
 
            

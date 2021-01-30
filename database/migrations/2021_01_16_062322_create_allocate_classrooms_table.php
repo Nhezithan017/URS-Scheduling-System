@@ -30,10 +30,13 @@ class CreateAllocateClassroomsTable extends Migration
             $table->integer('section_id')->unsigned();
             $table->foreign('section_id')->references('id')->on('sections')
             ->onDelete('cascade');
+            $table->integer('course_id')->unsigned();
+            $table->foreign('course_id')->references('id')->on('courses')
+            ->onDelete('cascade');
             $table->boolean('status')->default(false);
             $table->integer('class_size')->nullable();
             $table->string('year');
-            $table->string('section');
+            $table->json('section');
             $table->integer('lec')->nullable();
             $table->integer('lab')->nullable();
             $table->integer('unit')->nullable();

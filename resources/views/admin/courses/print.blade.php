@@ -28,7 +28,7 @@
 <table width="1000px" class="tbl">
   <thead>
     <tr>
-      <th scope="col" colspan="3">SECTION: {{ $sec->description }} {{ $sec->section }}</th>
+      <th scope="col" colspan="3">SECTION: {{ $sec->year ?? '' }} {{ $sec->description }} </th>
       <th scope="col" colspan="4">ADVISER: {{ $sec->adviser }}</th>
       <th scope="col" colspan="4">ROOM ASSIGNMENT</th>
     </tr>
@@ -59,13 +59,13 @@
       {{ $subject = App\Subject::find($all_cm->subject_id) }}
       <td>{{ $subject->code }}</td>
       <td>{{ $subject->description }}</td>
-      <td class="td-center">{{ $subject->lec  }}</td>
-      <td class="td-center">{{ $subject->lab }}</td>
-      <td class="td-center">{{ $subject->unit }}</td>
+      <td class="td-center">{{ $all_cm->lec  }}</td>
+      <td class="td-center">{{ $all_cm->lab }}</td>
+      <td class="td-center">{{ $all_cm->unit }}</td>
 
       <td class="td-center">{{ $all_cm->room_no }}</td>
       {{ $section = App\Section::find($all_cm->section_id) }}
-      <td class="td-center">{{ $all_cm->year }}-{{ $all_cm->section }}</td>
+      <td class="td-center">   {{ $all_cm->year }} {{ implode(',', $all_cm->section) }}</td>
       {{ $teacher = App\Teacher::find($all_cm->teacher_id) }}
       <td class="td-center">{{ $teacher->name }}</td>
       <td class="td-center">{{ $all_cm->status === 1 ? 'ok' : 'not' }}</td>
@@ -98,56 +98,7 @@
 </div>
 @endif
 @endforeach
-<table width="1000px">
-<thead>
-<tr align="center">
-<th  colspan="11">
-  ROOM COMBINE
-</th>
-</tr>
-<tr>
-<th scope="col">DAYS</th>
-<th scope="col">TIME</th> 
-<th scope="col">COURSE CODE</th>
-<th scope="col">DESCRIPTIVE TITLE</th>
-<th scope="col">LECTURE</th>
-<th scope="col">LAB/FIELD</th>
-<th scope="col">UNIT</th>
-<th scope="col">ROOM</th>
-<th scope="col">YR & SEC</th>
-<th scope="col" colspan="2">INSTRUCTOR</th>
-</thead>
-<tbody>
-@foreach($alloc_duplicate as $all_cm)
-@if($alloc_duplicate->count() >  0)
 
-<tr>
-
-<td>
-        {{ implode('-',$all_cm->days) }}
-      </td> 
-      <td width="80px">{{ Carbon\Carbon::parse($all_cm->start_time)->format('h:i') }} - {{ Carbon\Carbon::parse($all_cm->end_time)->format('h:i') }}</td>
-     
-      {{ $subject = App\Subject::find($all_cm->subject_id) }}
-      <td>{{ $subject->code }}</td>
-      <td>{{ $subject->description }}</td>
-      <td class="td-center">{{ $subject->lec  }}</td>
-      <td class="td-center">{{ $subject->lab }}</td>
-      <td class="td-center">{{ $subject->unit }}</td>
-
-      <td class="td-center">{{ $all_cm->room_no }}</td>
-      {{ $section = App\Section::find($all_cm->section_id) }}
-      <td class="td-center">{{ $all_cm->year }}-{{ $all_cm->section }}</td>
-      {{ $teacher = App\Teacher::find($all_cm->teacher_id) }}
-      <td class="td-center">{{ $teacher->name }}</td>
-      <td class="td-center">{{ $all_cm->status === 1 ? 'ok' : 'not' }}</td>
-
-</tr>
-@endif
-@endforeach
-
-</tbody>
-</table>
 
 <script type="text/javascript">
 

@@ -20,6 +20,11 @@ class Course extends Model
     {
         return $this->hasMany('App\Section');
     }
+    public function allocate_classroom()
+    {
+        return $this->hasMany('App\AllocateClassroom');
+    }
+    
     public function user()
     {
         return $this->belongsTo('App\User', 'user_id', 'id');

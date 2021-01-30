@@ -26,6 +26,7 @@ class AllocateClassRoomTableSeeder extends Seeder
                 'subject_id' => 1,
                 'section_id' => 1
            ],
+           
            [
             'room_no' => 'AC-1',
             'teacher' => 'Manuel Dangan',

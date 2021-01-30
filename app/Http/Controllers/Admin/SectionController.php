@@ -22,6 +22,8 @@ class SectionController extends Controller
  
         $this->sections = $sections;
         $this->instructors = $instructors;   
+        $this->year = $data_content->year;
+        $this->section = $data_content->section;
     }
     
     public function showSections(Request $request, Section $section)
@@ -76,6 +78,7 @@ class SectionController extends Controller
 
                 $data = $this->validate($request, [
                     'adviser' => 'required',
+                    'year' => 'integer',
                     'description' => 'required',
                 ]);
 
@@ -92,6 +95,8 @@ class SectionController extends Controller
         $data['modify'] = 0;
        
         $data['instructors'] = $this->instructors->latest()->get();
+        $data['year'] = $this->year;
+        $data['section'] = $this->section;
         return view('admin.sections.form', $data);
     }
  
@@ -108,6 +113,8 @@ class SectionController extends Controller
 
         $data['instructors'] = $this->instructors->latest()->get();
         $data['modify'] = 1;
+        $data['year'] = $this->year;
+        $data['section'] = $this->section;
         return view('admin.sections.form', $data);
     }
 
@@ -120,6 +127,7 @@ class SectionController extends Controller
 
             $data = $this->validate($request, [
                 'adviser' => 'required',
+                'year' => 'integer',
                 'description' => 'required'
             ]);
 

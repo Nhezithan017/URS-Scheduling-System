@@ -36,12 +36,41 @@
                                     </select>    
                         </div>
                     </div>  
-                    <div class="col-6">
-                    <div class="form-group row">
-                    <label for="" class="form-label col-3">Description:</label>       
-                                 <input type="text" class="form-control col" value="{{ $sections->description ?? old('description') }}" name="description">
+                    <div class="col-4">
+                    <div class="form-group">
+                            <label for="" class="form-label">Year:</label>
+                                <select class="selectyear"  data-live-search="true" name="year">
+                                <option disabled selected>--Select Year--</option>
+                                             @foreach ($year as $value)
+                                                        <option value="{{ $value }}"
+                                                        
+                                                        @if ($value == ($sections->year ?? ''))
+                                                                selected="selected"
+                                                        @endif
+                                                        >{{ $value }}</option>
+                                                @endforeach
+                                </select>
+                            
                         </div>
                     </div>  
+                    <div class="col-4">
+                    <div class="form-group">
+                            <label for="" class="form-label">Section:</label>    
+                            <select class="selectsection"   data-live-search="true" name="description">
+                                               
+                                                @foreach ($section as $value)
+                                                        <option value="{{ $value }}"
+                                                        @if ($value == ($sections->description ?? ''))
+                                                    
+                                                                selected="selected"
+                                                        @endif
+                                                        >{{ $value }}</option>
+                                                @endforeach
+
+                                   </select>
+                        
+                        </div>
+                    </div>
                    
               </div> 
 

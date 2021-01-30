@@ -118,12 +118,12 @@
                         <div class="col-6">
                         <div class="form-group">
                             <label for="" class="form-label">Section:</label><br/>       
-                            <select class="selectsection"  data-live-search="true" name="section">
-                                                <option disabled selected>--Select Section--</option>
+                            <select class="selectsection"  multiple data-live-search="true" name="section[]">
+                                               
                                                 @foreach ($section as $value)
                                                         <option value="{{ $value }}"
-                                                        
-                                                        @if ($value == ($allocate_classroom->section ?? ''))
+                                                        @if (in_array($value, $allocate_classroom->section ?? [] ))
+                                                    
                                                                 selected="selected"
                                                         @endif
                                                         >{{ $value }}</option>
