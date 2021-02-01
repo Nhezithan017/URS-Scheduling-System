@@ -13,6 +13,7 @@
 <div class="row">
   <div class="col text-center mb-2">
     <h1 class="">ROOM UTILIZATION</h1>
+    <h1 class="text-uppercase">{{ $course->description }}</h1>
     <h1 class="text-uppercase">{{ $course->semester }}, SY {{ $course->sy_start }} - {{ $course->sy_end }}</h1>
   </div>
 </div>

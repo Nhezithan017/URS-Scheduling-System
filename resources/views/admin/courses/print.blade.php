@@ -18,6 +18,7 @@
   <div class="col text-center mb-4">
     <h1 class="">1ST YEAR - 5TH YEAR</h1>
     <h1 class="">SCHEDULE OF CLASS</h1>
+    <h1 class="text-uppercase">{{ $course->description }}</h1>
     <h1 class="text-uppercase">{{ $course->semester }}, SY {{ $course->sy_start }} - {{ $course->sy_end }}</h1>
   </div>
 </div>
