@@ -13,7 +13,7 @@ class CourseTableSeeder extends Seeder
     {
         DB::table('courses')->insert([
             [
-                'description' => 'Electronics Engineer',
+                'description' => 'Bachelor of Science in Computer Engineering',
                 'sy_start' => 2020,
                 'sy_end' => 2021,
                 'semester' => '1st Semester',
@@ -21,7 +21,7 @@ class CourseTableSeeder extends Seeder
            ],
            [
             
-                'description' => 'Bachelor of Science Computer Engineer',
+                'description' => 'Bachelor of Science in Electrical Engineering',
                 'sy_start' => 2021,
                 'sy_end' => 2022,
                 'semester' => '1st Semester',

@@ -13,18 +13,18 @@ class SubjectTableSeeder extends Seeder
     {
         DB::table('subjects')->insert([
             [
-                'code' => 'FIL1',
-                'description' => 'Filipino',
+                'code' => 'MATH 2E',
+                'description' => 'Calculus 1 (Differential Calculus)',
                 'lec' => 3,
                 'lab' => 0,
                 'unit' => 3
            ],
            [
-                'code' => 'ENG1',
-                'description' => 'English',
+                'code' => 'ENGG CHEM',
+                'description' => 'Chemistry for Engineers',
                 'lec' => 3,
-                'lab' => 0,
-                'unit' => 3
+                'lab' => 3,
+                'unit' => 4
             
             ]
            ]);
