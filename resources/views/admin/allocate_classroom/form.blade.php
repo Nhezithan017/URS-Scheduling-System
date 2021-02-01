@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('main-content')
+
 <style type="text/css">
 
 </style>

@@ -66,7 +66,7 @@
         </header>
         <!-- Services-->
         <section class="page-section" id="services">
-            <div class="container">
+            <div class="container">`
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Services</h2>
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
@@ -78,7 +78,7 @@
                        
                             <i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>
                         </span>
-                        <h4 class="my-3">Scheduling</h4>
+                        <h4 class="my-3">Schedule and Print</h4>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                     </div>
                     <div class="col-md-4">
@@ -92,9 +92,9 @@
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-print fa-stack-1x fa-inverse"></i>
+                            <i class="fas fa-mobile fa-stack-1x fa-inverse"></i>
                         </span>
-                        <h4 class="my-3">Print Schedule</h4>
+                        <h4 class="my-3">Mobile Compatibility</h4>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                     </div>
                 </div>
@@ -106,7 +106,9 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">DEPARTMENT</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">The Philippine Institute of Civil Engineers-University of 
+
+Rizal System-Student Chapter (PICE-URS-SC)  is under the PICE National Chapter and PICE Rizal Chapter,  an official student organization at University of Rizal System to govern the entire Civil Engineering student population.</h3>
                 </div>
                 <ul class="timeline">
                     <li>
@@ -183,9 +185,9 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="{{ asset('/uploads/teams/1.jpg') }}" alt="" />
-                            <h4>Kay Garland</h4>
-                            <p class="text-muted">Lead Designer</p>
+                            <img class="mx-auto rounded-circle" src="{{ asset('/uploads/teams/2.png') }}" alt="" />
+                            <h4>Heidilyn Sampaga</h4>
+                            <p class="text-muted">Team Leader</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-instagram"></i></a>
@@ -193,9 +195,9 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="{{ asset('/uploads/teams/2.png') }}" alt="" />
-                            <h4>Kay Garland</h4>
-                            <p class="text-muted">Lead Designer</p>
+                            <img class="mx-auto rounded-circle" src="{{ asset('/uploads/teams/1.jpg') }}" alt="" />
+                            <h4>Ellois Raven S. Lobino</h4>
+                            <p class="text-muted">Member</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-instagram"></i></a>
@@ -204,8 +206,8 @@
                     <div class="col-lg-3">
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="{{ asset('/uploads/teams/3.jpg') }}" alt="" />
-                            <h4>Larry Parker</h4>
-                            <p class="text-muted">Lead Marketer</p>
+                            <h4>Krishia Joy F. Calub</h4>
+                            <p class="text-muted">Member</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-instagram"></i></a>
@@ -214,8 +216,8 @@
                     <div class="col-lg-3">
                         <div class="team-member">
                             <img class="mx-auto rounded-circle" src="{{ asset('/uploads/teams/4.png') }}" alt="" />
-                            <h4>Valerie Kaye Tuhao</h4>
-                            <p class="text-muted">Lead Developer</p>
+                            <h4>Valerie Kaye P. Tuhao</h4>
+                            <p class="text-muted">Member</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-instagram"></i></a>

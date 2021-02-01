@@ -27,7 +27,7 @@ class TeacherController extends Controller
 
        $instructor =  $this->instructors->find($id);
 
-        $pdf->loadView('admin.instructors.print', compact('instructor'));
+        $pdf->loadView('admin.instructors.print', compact('instructor'))->setPaper('a4', 'landscape');
 
             
        return $pdf->stream('invoice.pdf');

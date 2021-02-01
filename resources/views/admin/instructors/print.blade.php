@@ -14,7 +14,7 @@
   </div>
 </div>
 <div class="row mb-4 container-fluid">
-<table>
+<table width="1000px">
   <tbody>
     <tr>
       <td colspan="4" co>Name: {{ $instructor->name }}</td>

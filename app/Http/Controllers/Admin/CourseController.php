@@ -64,7 +64,21 @@ class CourseController extends Controller
             
        return $pdf->stream('invoice.pdf');
     }
+    public function instructors($id)
+    {
+        $pdf = app('dompdf.wrapper');
 
+        $alloc = AllocateClassroom::where('course_id', '=', $id)->get();
+ 
+        $pdf->getDomPDF()->set_option("enable_php", true);
+
+     
+
+        $pdf->loadView('admin.courses.instructors', compact('alloc'))->setPaper('a4', 'landscape');
+
+            
+       return $pdf->stream('invoice.pdf');
+    }
     public function room_utilization($id)
     {
         $pdf = app('dompdf.wrapper');
