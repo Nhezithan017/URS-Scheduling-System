@@ -66,18 +66,9 @@ class AllocateClassroomController extends Controller
              $section_field = $request->input('section');
              $room_no = $request->input('room_no');
 
-            $alloc = $this->allocate_classroom
-                            ->where(function($query) use($start_time, $end_time){
-                                return $query->where('start_time', '<=', $start_time)
-                                            ->where('end_time', '>=', $end_time)->count() == 0;
-                            })
-                            ->where(function($query) use ($room_no){
-                                    return $query->where('room_no', '=', $room_no)->count() > 0;
-                            })
-                            ->whereJsonContains('days', $days)->count() > 0;
+            $alloc = $this->allocate_classroom->daysAndTimeOverlaps($start_time, $end_time , $days, $room_no, $section);
 
             
-
            if($alloc){
                 return redirect('section/' . $section->id . '/show')
                 ->with('error','sorry , day and time overlaps, choose other schedule');
@@ -110,7 +101,7 @@ class AllocateClassroomController extends Controller
         return view('admin.allocate_classroom.form', $data);
     }
  
-
+    
     public function showAllocateClassRoom(Request $request, $id)
     {
         $data = [];
@@ -153,15 +144,26 @@ class AllocateClassroomController extends Controller
                 'subject_id.required' => 'The subject field is required'
             ]);
 
+            $start_time = $request->input('start_time');
+            $end_time = $request->input('end_time');
+            $days = $request->input('days');
+            $section_field = $request->input('section');
+            $room_no = $request->input('room_no');
+
+            $alloc = $this->allocate_classroom->daysAndTimeOverlaps($start_time, $end_time , $days, $room_no, $section);
 
             
+           if($alloc){
+                return redirect('section/' . $section->id . '/show')
+                ->with('error','sorry , day and time overlaps, choose other schedule');
+           }else{
             $sub = $this->subjects->find($request->input('subject_id'));
 
            
             $this->allocate_classroom->find($id)->update($data + [
-                'lec' => $sub->lec,
-                'lab'=> $sub->lab,
-                'unit' => $sub->unit
+                'lec' => $sub->lec * count($section_field),
+                'lab'=> $sub->lab * count($section_field),
+                'unit' => $sub->unit * count($section_field),
                 ]);
 
             $section_id = $this->allocate_classroom->find($id);
@@ -169,6 +171,7 @@ class AllocateClassroomController extends Controller
             return redirect('section/' . $section_id->section_id . '/show')
         ->with('success','allocated  room Update successfully');
         }
+    }
     }
     public function deleteAllocateClassRoom($id){
 

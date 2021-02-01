@@ -32,12 +32,20 @@ class AllocateClassroom extends Model
     return $this->hasMany('App\Subject','id','subject_id');
     }
   
-    public function daysAndTimeOverlaps($start_time, $end_time , $days)
+    public function daysAndTimeOverlaps($start_time, $end_time , $days, $room_no, $section)
     {
-       return  AllocateClassroom::where('days','like' ,'%' .implode('', $days). '%')
-        ->where('start_time', '<=', $start_time)
-        ->where('end_time','>=', $end_time)                                
-        ->count();
+       return  $this
+                ->where(function($query) use($start_time, $end_time){
+                    return $query->where('start_time', '<=', $start_time)
+                                ->where('end_time', '>=', $end_time)->count() == 0;
+                })
+                ->where(function($query) use ($section){
+                    return $query->where('course_id', '=', $section->course_id)->count() > 0;
+            })
+                ->where(function($query) use ($room_no){
+                        return $query->where('room_no', '=', $room_no)->count() > 0;
+                })
+                ->whereJsonContains('days', $days)->count() > 0;
         
     }
 
