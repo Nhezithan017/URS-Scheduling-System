@@ -170,7 +170,7 @@
                             </div>
                         </div>  
                     </div>
-                  @if(auth()->id() === 1)
+                  @if(auth()->user()->getRoleNames()[0] == "Admin")
                     <div class="form-group">
                                     <label class="form-group-label d-block"> <strong>Status:</strong></label>
                                         <div class="form-check form-check-inline">

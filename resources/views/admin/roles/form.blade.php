@@ -33,7 +33,7 @@
                                         @foreach($permission as $value)
 
                                             <label>{{ Form::checkbox('permission[]', $value->id,  $modify === 1 ? (in_array($value->id, $role_permissions) ? true : false) : false , array('class' => 'name')) }}
-                                            {{ $value->name }}</label>
+                                            {{ str_replace('-', ' ',$value->name) }}</label>
                                         <br/>
                                         @endforeach
                                     </div>

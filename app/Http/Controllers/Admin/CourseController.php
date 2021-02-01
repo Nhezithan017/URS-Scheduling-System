@@ -27,9 +27,13 @@ class CourseController extends Controller
         $this->rooms = $data_content->rooms;
     }
     public function getCourses(Request $request){
-
+     
         if ($request->ajax()) {
-            $data = Course::latest()->get();
+            if(auth()->user()->getRoleNames()[0] == "Admin"){
+                $data = Course::latest()->get();
+            }else{
+                $data = auth()->user()->course;
+            }
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){

@@ -64,12 +64,15 @@ class AllocateClassroomController extends Controller
              $end_time = $request->input('end_time');
              $days = $request->input('days');
              $section_field = $request->input('section');
-            
+             $room_no = $request->input('room_no');
 
             $alloc = $this->allocate_classroom
                             ->where(function($query) use($start_time, $end_time){
                                 return $query->where('start_time', '<=', $start_time)
                                             ->where('end_time', '>=', $end_time)->count() == 0;
+                            })
+                            ->where(function($query) use ($room_no){
+                                    return $query->where('room_no', '=', $room_no)->count() > 0;
                             })
                             ->whereJsonContains('days', $days)->count() > 0;
 
